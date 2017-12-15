@@ -12,9 +12,9 @@ environments.
 - [ ] make a survey of reinforcement learning algorithms
       which are applicable to gym's problems
 - [ ] implement some algorithms from survey and apply them to gym environments
-    - [ ] Atari 2600 environments
+    - [ ] some [Atari 2600][7] environments
     - [ ] *HumanoidFlagrun* from [Roboschool][2]
-    - [ ] *Kick and Defend* [competitve self-play environment][3]
+    - [ ] *Kick and Defend* [competitive self-play environment][3]
 - [ ] use Python 3.4 or higher
 - [ ] use [pytest][4] to make sure algorithm are correctly implemented
 - [ ] for implementation use [NumPy][5] and [pandas][6]
@@ -25,6 +25,7 @@ environments.
 [4]: https://docs.pytest.org/en/latest/ (pytest Documentation)
 [5]: http://www.numpy.org/ (NumPy Documentation)
 [6]: https://pandas.pydata.org/ (Python Data Analysis Library)
+[7]: https://en.wikipedia.org/wiki/Atari_2600 (Atari 2600 Wikipedia)
 
 ## References
 
