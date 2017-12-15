@@ -1,2 +1,4 @@
-# roboschool-rl
-reinforcement learning algorithms applied to roboschool
+# gym-rl
+
+reinforcement learning algorithms applied to
+[gym](https://github.com/openai/gym)
