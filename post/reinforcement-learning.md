@@ -2,16 +2,17 @@ Title: Introduction to Reinforcement Learning
 Date: 2018-01-04 08:03
 Category: reinforcement learning
 Tags: reinforcement learning
-Status: draft
 
 In this post I would like to introduce reinforcement learning
 because it is currently producing exciting results
-(see [OpenAI][2] and [DeepMind][3]).
+(see [OpenAI][openai] and [DeepMind][deepmind]).
 and in my opinion leads to general artificial intelligence.
 For further reading please refer to book
-[Reinforcement Learning: An Introduction][4] by Sutton and Barto.
+[Reinforcement Learning: An Introduction][sutton2018] by Sutton and Barto.
 
-[1]: http://incompleteideas.net/book/the-book.html
+[openai]: https://openai.com/ (OpenAI)
+[deepmind]: https://deepmind.com/ (DeepMind)
+[sutton2018]: http://incompleteideas.net/book/the-book.html
      (Sutton and Barto - Reinforcement Learning: An Introduction)
 
 Reinforcement learning is a third machine learning paradigm alongside
@@ -75,3 +76,45 @@ Purely evaluative feedback indicates how good the action taken was
 so depends entirely on the action.
 Purely instructive feedback indicates the correct action independently of
 action actually taken.
+
+### A $k$-armed Bandit Problem
+
+The $k$-armed bandit problem is named by analogy to
+[slot machine][slot-machine].
+An agent is reapeatedly faced with a choice among $k$ different actions.
+After each choice it receive a numerical reward from a stationary probability
+distribution.
+The objective is to maximize the expected total reward over some *time steps*.
+
+[slot-machine]: https://en.wikipedia.org/wiki/Slot_machine (Slot Machine)
+
+In the $k$-armed bandit problem each of the $k$ actions has an expected reward
+given that the action is selected (action's value).
+The action selected at time step $t$ is denoted as $A_t$
+and its reward as $R_t$.
+The value of an arbitraty action $a$ is the expected reward
+given that $a$ is selected:
+
+$$q_*(a) \equiv \mathrm{E}(R_t | A_t = a).$$
+
+If the value of each function was known it would be trivial to solve
+the $k$-armed bandit problem.
+But their are not certainly known although there might be estimates.
+The estimated value of action $a$ at time step $t$ is $Q_t(a)$
+and it should be as close as possible to $q_*(a)$.
+
+### Exploration and Exploitation
+
+Actions whose estimated value is greatest are called *greedy* actions.
+Selecting one of these actions is *exploiting* current knowledge of the
+values of the actoins.
+If a nongreedy action is selected than an agent is *exploring*
+cause it enables to improve estimate of the nongreedy action.
+Exploitation maximize the expected reward one step
+and exploration may produce greater total reward.
+It is impossible to explore and exploit with any single action selection
+so this is refered as *conflict* between exploration and exploitation.
+The need to balance exploration and exploitation is big challange in
+reinforcement learning.
+
+### Action-value Methods
