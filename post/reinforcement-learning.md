@@ -64,3 +64,14 @@ experienced (planning).
 
 Most of the reinforcement learning methods are concerned with estimating value
 functions (except evolutionary methods).
+
+## Multi-armed Bandits
+
+Reinforcement learning uses training information
+which *evaluates* the actions taken
+rather than *instructs* by giving correct actions.
+Therefore the search for good behaviour is needed.
+Purely evaluative feedback indicates how good the action taken was
+so depends entirely on the action.
+Purely instructive feedback indicates the correct action independently of
+action actually taken.
