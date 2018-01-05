@@ -5,14 +5,14 @@ Tags: reinforcement learning
 
 In this post I would like to introduce reinforcement learning
 because it is currently producing exciting results
-(see [OpenAI][openai] and [DeepMind][deepmind]).
+(see [OpenAI] and [DeepMind]).
 and in my opinion leads to general artificial intelligence.
 For further reading please refer to book
 [Reinforcement Learning: An Introduction][sutton2018] by Sutton and Barto.
 
 [openai]: https://openai.com/ (OpenAI)
 [deepmind]: https://deepmind.com/ (DeepMind)
-[sutton2018]: http://incompleteideas.net/book/the-book.html
+[sutton2018]: http://incompleteideas.net/book/the-book-2nd.html
      (Sutton and Barto - Reinforcement Learning: An Introduction)
 
 Reinforcement learning is a third machine learning paradigm alongside
@@ -81,7 +81,7 @@ action actually taken.
 
 The $k$-armed bandit problem is named by analogy to
 [slot machine][slot-machine].
-An agent is reapeatedly faced with a choice among $k$ different actions.
+An agent is repeatedly faced with a choice among $k$ different actions.
 After each choice it receive a numerical reward from a stationary probability
 distribution.
 The objective is to maximize the expected total reward over some *time steps*.
@@ -92,7 +92,7 @@ In the $k$-armed bandit problem each of the $k$ actions has an expected reward
 given that the action is selected (action's value).
 The action selected at time step $t$ is denoted as $A_t$
 and its reward as $R_t$.
-The value of an arbitraty action $a$ is the expected reward
+The value of an arbitrary action $a$ is the expected reward
 given that $a$ is selected:
 
 $$q_*(a) \equiv \mathrm{E}(R_t | A_t = a).$$
@@ -107,14 +107,42 @@ and it should be as close as possible to $q_*(a)$.
 
 Actions whose estimated value is greatest are called *greedy* actions.
 Selecting one of these actions is *exploiting* current knowledge of the
-values of the actoins.
-If a nongreedy action is selected than an agent is *exploring*
-cause it enables to improve estimate of the nongreedy action.
+values of the actions.
+If a non-greedy action is selected than an agent is *exploring*
+cause it enables to improve estimate of the non-greedy action.
 Exploitation maximize the expected reward one step
 and exploration may produce greater total reward.
 It is impossible to explore and exploit with any single action selection
-so this is refered as *conflict* between exploration and exploitation.
-The need to balance exploration and exploitation is big challange in
+so this is referred as *conflict* between exploration and exploitation.
+The need to balance exploration and exploitation is big challenge in
 reinforcement learning.
 
 ### Action-value Methods
+
+The true value of an action it the mean reward
+so natural way to estimate is by averaging received rewards:
+
+$$Q_t(a) \equiv \frac{\sum^{t - 1}_{i = 1} R_i \cdot \mathbb{1}_{A_i = a}}
+{\sum^{t - 1}_{i = 1} \mathbb{1}_{A_i = a}},$$
+
+where $\mathbb{1}_{\text{condition}}$ is random variable indicator
+that is $1$ if condition is true else $0$.
+If the denominator is $0$ then $Q_t(a)$ is defined as a default value
+(for example $0$).
+Moreover if the denominator goes to infinity
+then $Q_t(a)$ converges to $q_*(a)$.
+This way of estimating action values is called *sample-average*.
+
+The simplest action selection rule based on sample-average is to select the
+action with highest estimated value (greedy action):
+
+$$A_t \equiv \operatorname*{arg\,max}_a Q_t(a).$$
+
+Greedy action selection always exploit current knowledge to maximize immediate
+reward and spends no time exploring.
+Simple modification is with probability $\varepsilon$ select instead randomly
+any action with equal probability independently of the action-value estimates.
+These which use near-greedy action selection rule are called
+*$\varepsilon$-greedy* methods.
+Advantage of these methods is in limit every action will be sampled
+an infinite number of times thus all $Q_t(a)$ converge to $q_*(a)$.
