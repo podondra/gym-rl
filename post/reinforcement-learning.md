@@ -81,7 +81,8 @@ action actually taken.
 
 The $k$-armed bandit problem is named by analogy to
 [slot machine][slot-machine].
-An agent is repeatedly faced with a choice among $k$ different actions.
+An agent is repeatedly faced with a choice among $k$ different actions
+in *nonassociative*, *stationary* setting (action taken only in one situation).
 After each choice it receive a numerical reward from a stationary probability
 distribution.
 The objective is to maximize the expected total reward over some *time steps*.
@@ -108,8 +109,8 @@ and it should be as close as possible to $q_*(a)$.
 Actions whose estimated value is greatest are called *greedy* actions.
 Selecting one of these actions is *exploiting* current knowledge of the
 values of the actions.
-If a non-greedy action is selected than an agent is *exploring*
-cause it enables to improve estimate of the non-greedy action.
+If a nongreedy action is selected than an agent is *exploring*
+cause it enables to improve estimate of the nongreedy action.
 Exploitation maximize the expected reward one step
 and exploration may produce greater total reward.
 It is impossible to explore and exploit with any single action selection
@@ -146,3 +147,57 @@ These which use near-greedy action selection rule are called
 *$\varepsilon$-greedy* methods.
 Advantage of these methods is in limit every action will be sampled
 an infinite number of times thus all $Q_t(a)$ converge to $q_*(a)$.
+
+### Incremental Implementation
+
+Sample average action value methods can be computed with constant memory
+and constant per-time-step computation.
+Let $R_i$ be the reward received after the $i$th selection *of this action*
+and $Q_n$ denote the estimate of its action value
+after it has been selected $n - 1$ times
+which can be written as:
+
+$$Q_n \equiv \frac{R_1 + R_2 + \cdots + R_{n - 1}}{n - 1}$$
+
+Obvious implementation would be to store all rewards
+and compute the estimate when needed.
+Then, the memory and computational requirements would grow linearly
+as more rewards are seen.
+That is not necessary because and incremental formula can be devised.
+Given $Q_n$ and the $n$th reward $R_n$ the new average is computed by:
+
+$$
+\begin{align}
+Q_{n + 1} &= \frac{1}{n} \sum^n_{i = 1} R_i \nonumber \\
+          &= \frac{1}{n} (R_n + \sum^{n - 1}_{i = 1} R_i) \nonumber \\
+          &= \frac{1}{n} (R_n + (n - 1) \frac{1}{n - 1} \sum^{n - 1}_{i = 1} R_i) \nonumber \\
+          &= \frac{1}{n} (R_n + (n - 1) Q_n) \nonumber \\
+          &= \frac{1}{n} (R_n + n Q_n - Q_n) \nonumber \\
+          &= Q_n + \frac{1}{n} (R_n - Q_n). \nonumber \\
+\end{align}
+$$
+
+Code for complete bandit algorithm with incrementally computed sample averages
+and $\varepsilon$-greedy action selection:
+
+```python3
+# TODO implementation
+while True:
+    bandit(a)
+```
+
+where `bandit(a)` is function which takes an action
+and returns a corresponding reward.
+
+The update rule above occurs frequently and its general form:
+
+$$\textit{new estimate} \gets \textit{old estimate} + \textit{step size}
+\cdot (\textit{target} - \textit{old estimate}).$$
+
+The expression $(\textit{target} - \textit{old estimate})$ is the estimate's
+*error* which is reduced by taking a step toward the $\textit{target}$.
+Note that the step-size parameter changes over time steps
+(for $n$th reward for action $a$ the step-size is $\frac{1}{n}$).
+Further the step-size parameter is denoted as $\alpha$ or $\alpha_t(a)$.
+
+### Tracking a Nonstationary Problem
