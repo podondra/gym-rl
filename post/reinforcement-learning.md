@@ -77,11 +77,11 @@ so depends entirely on the action.
 Purely instructive feedback indicates the correct action independently of
 action actually taken.
 
-### A $k$-armed Bandit Problem
+### A \\(k\\)-armed Bandit Problem
 
-The $k$-armed bandit problem is named by analogy to
+The \\(k\\)-armed bandit problem is named by analogy to
 [slot machine][slot-machine].
-An agent is repeatedly faced with a choice among $k$ different actions
+An agent is repeatedly faced with a choice among \\(k\\) different actions
 in *nonassociative*, *stationary* setting (action taken only in one situation).
 After each choice it receive a numerical reward from a stationary probability
 distribution.
@@ -89,20 +89,20 @@ The objective is to maximize the expected total reward over some *time steps*.
 
 [slot-machine]: https://en.wikipedia.org/wiki/Slot_machine (Slot Machine)
 
-In the $k$-armed bandit problem each of the $k$ actions has an expected reward
+In the \\(k\\)-armed bandit problem each of the \\(k\\) actions has an expected reward
 given that the action is selected (action's value).
-The action selected at time step $t$ is denoted as $A_t$
-and its reward as $R_t$.
-The value of an arbitrary action $a$ is the expected reward
-given that $a$ is selected:
+The action selected at time step \\(t\\) is denoted as \\(A_t\\)
+and its reward as \\(R_t\\).
+The value of an arbitrary action \\(a\\) is the expected reward
+given that \\(a\\) is selected:
 
-$$q_*(a) \equiv \mathrm{E}(R_t | A_t = a).$$
+\\[q\_\*(a) \coloneqq \mathbb{E}[R\_t | A\_t = a].\\]
 
 If the value of each function was known it would be trivial to solve
-the $k$-armed bandit problem.
+the \\(k\\)-armed bandit problem.
 But their are not certainly known although there might be estimates.
-The estimated value of action $a$ at time step $t$ is $Q_t(a)$
-and it should be as close as possible to $q_*(a)$.
+The estimated value of action \\(a\\) at time step \\(t\\) is \\(Q_t(a)\\)
+and it should be as close as possible to \\(q_*(a)\\).
 
 ### Exploration and Exploitation
 
@@ -123,62 +123,66 @@ reinforcement learning.
 The true value of an action it the mean reward
 so natural way to estimate is by averaging received rewards:
 
-$$Q_t(a) \equiv \frac{\sum^{t - 1}_{i = 1} R_i \cdot \mathbb{1}_{A_i = a}}
-{\sum^{t - 1}_{i = 1} \mathbb{1}_{A_i = a}},$$
+\\[Q_t(a) \coloneqq \frac{\sum^{t - 1}\_{i = 1} R\_i \cdot 1\_{A\_i = a}}
+{\sum^{t - 1}_{i = 1} 1\_{A\_i = a}},\\]
 
-where $\mathbb{1}_{\text{condition}}$ is random variable indicator
-that is $1$ if condition is true else $0$.
-If the denominator is $0$ then $Q_t(a)$ is defined as a default value
-(for example $0$).
+where \\(\mathbb{1}\_{\text{condition}}\\) is random variable indicator
+that is \\(1\\) if condition is true else \\(0\\).
+If the denominator is \\(0\\) then \\(Q_t(a)\\) is defined as a default value
+(for example \\(0\\)).
 Moreover if the denominator goes to infinity
-then $Q_t(a)$ converges to $q_*(a)$.
+then \\(Q_t(a)\\) converges to \\(q\_\*(a)\\).
 This way of estimating action values is called *sample-average*.
 
 The simplest action selection rule based on sample-average is to select the
 action with highest estimated value (greedy action):
 
-$$A_t \equiv \operatorname*{arg\,max}_a Q_t(a).$$
+\\[A_t \coloneqq \operatorname{argmax}_a Q_t(a).\\]
+
 
 Greedy action selection always exploit current knowledge to maximize immediate
 reward and spends no time exploring.
-Simple modification is with probability $\varepsilon$ select instead randomly
-any action with equal probability independently of the action-value estimates.
+Simple modification is with probability \\(\varepsilon\\) select instead
+randomly any action with equal probability independently of the action-value
+estimates.
 These which use near-greedy action selection rule are called
-*$\varepsilon$-greedy* methods.
+\\(\varepsilon\\)*-greedy* methods.
 Advantage of these methods is in limit every action will be sampled
-an infinite number of times thus all $Q_t(a)$ converge to $q_*(a)$.
+an infinite number of times thus all \\(Q_t(a)\\) converge to \\(q\_\*(a)\\).
 
 ### Incremental Implementation
 
 Sample average action value methods can be computed with constant memory
 and constant per-time-step computation.
-Let $R_i$ be the reward received after the $i$th selection *of this action*
-and $Q_n$ denote the estimate of its action value
-after it has been selected $n - 1$ times
+Let \\(R_i\\) be the reward received after the \\(i\\)th selection *of this action*
+and \\(Q_n\\) denote the estimate of its action value
+after it has been selected \\(n - 1\\) times
 which can be written as:
 
-$$Q_n \equiv \frac{R_1 + R_2 + \cdots + R_{n - 1}}{n - 1}$$
+\\[Q\_n \coloneqq \frac{R\_1 + R\_2 + \cdots + R\_{n - 1}}{n - 1}\\]
 
 Obvious implementation would be to store all rewards
 and compute the estimate when needed.
 Then, the memory and computational requirements would grow linearly
 as more rewards are seen.
 That is not necessary because and incremental formula can be devised.
-Given $Q_n$ and the $n$th reward $R_n$ the new average is computed by:
+Given \\(Q_n\\) and the \\(n\\)th reward \\(R_n\\)
+the new average is computed by:
 
-$$
-\begin{align}
-Q_{n + 1} &= \frac{1}{n} \sum^n_{i = 1} R_i \nonumber \\
-          &= \frac{1}{n} (R_n + \sum^{n - 1}_{i = 1} R_i) \nonumber \\
-          &= \frac{1}{n} (R_n + (n - 1) \frac{1}{n - 1} \sum^{n - 1}_{i = 1} R_i) \nonumber \\
-          &= \frac{1}{n} (R_n + (n - 1) Q_n) \nonumber \\
-          &= \frac{1}{n} (R_n + n Q_n - Q_n) \nonumber \\
-          &= Q_n + \frac{1}{n} (R_n - Q_n). \nonumber \\
-\end{align}
-$$
+\\[
+\begin{aligned}
+Q\_{n + 1} &= \frac{1}{n} \sum^n\_{i = 1} R\_i \\\\
+          &= \frac{1}{n} (R\_n + \sum^{n - 1}\_{i = 1} R\_i) \\\\
+          &= \frac{1}{n} (R\_n + (n - 1) \frac{1}{n - 1} \sum^{n - 1}\_{i = 1}
+             R\_i) \\\\
+          &= \frac{1}{n} (R\_n + (n - 1) Q\_n) \\\\
+          &= \frac{1}{n} (R\_n + n Q\_n - Q\_n) \\\\
+          &= Q\_n + \frac{1}{n} (R\_n - Q\_n).
+\end{aligned}
+\\]
 
 Code for complete bandit algorithm with incrementally computed sample averages
-and $\varepsilon$-greedy action selection:
+and \\(\varepsilon\\)-greedy action selection:
 
 ```python3
 # TODO implementation
@@ -191,13 +195,13 @@ and returns a corresponding reward.
 
 The update rule above occurs frequently and its general form:
 
-$$\textit{new estimate} \gets \textit{old estimate} + \textit{step size}
-\cdot (\textit{target} - \textit{old estimate}).$$
+\\[\textit{new estimate} \gets \textit{old estimate} + \textit{step size}
+\cdot (\textit{target} - \textit{old estimate}).\\]
 
-The expression $(\textit{target} - \textit{old estimate})$ is the estimate's
-*error* which is reduced by taking a step toward the $\textit{target}$.
+The expression \\((\textit{target} - \textit{old estimate})\\) is the estimate's
+*error* which is reduced by taking a step toward the \\(\textit{target}\\).
 Note that the step-size parameter changes over time steps
-(for $n$th reward for action $a$ the step-size is $\frac{1}{n}$).
-Further the step-size parameter is denoted as $\alpha$ or $\alpha_t(a)$.
+(for \\(n\\)th reward for action \\(a\\) the step-size is \\(\frac{1}{n}\\)).
+Further the step-size parameter is denoted as \\(\alpha\\) or \\(\alpha_t(a)\\).
 
 ### Tracking a Nonstationary Problem
