@@ -96,7 +96,7 @@ and its reward as \\(R_t\\).
 The value of an arbitrary action \\(a\\) is the expected reward
 given that \\(a\\) is selected:
 
-\\[q\_\*(a) \coloneqq \mathbb{E}[R\_t | A\_t = a].\\]
+\\[q\_\*(a) \equiv \mathbb{E}[R\_t | A\_t = a].\\]
 
 If the value of each function was known it would be trivial to solve
 the \\(k\\)-armed bandit problem.
@@ -123,7 +123,7 @@ reinforcement learning.
 The true value of an action it the mean reward
 so natural way to estimate is by averaging received rewards:
 
-\\[Q_t(a) \coloneqq \frac{\sum^{t - 1}\_{i = 1} R\_i \cdot 1\_{A\_i = a}}
+\\[Q_t(a) \equiv \frac{\sum^{t - 1}\_{i = 1} R\_i \cdot 1\_{A\_i = a}}
 {\sum^{t - 1}_{i = 1} 1\_{A\_i = a}},\\]
 
 where \\(\mathbb{1}\_{\text{condition}}\\) is random variable indicator
@@ -137,7 +137,7 @@ This way of estimating action values is called *sample-average*.
 The simplest action selection rule based on sample-average is to select the
 action with highest estimated value (greedy action):
 
-\\[A_t \coloneqq \operatorname{argmax}_a Q_t(a).\\]
+\\[A_t \equiv \operatorname{argmax}_a Q_t(a).\\]
 
 
 Greedy action selection always exploit current knowledge to maximize immediate
@@ -159,7 +159,7 @@ and \\(Q_n\\) denote the estimate of its action value
 after it has been selected \\(n - 1\\) times
 which can be written as:
 
-\\[Q\_n \coloneqq \frac{R\_1 + R\_2 + \cdots + R\_{n - 1}}{n - 1}\\]
+\\[Q\_n \equiv \frac{R\_1 + R\_2 + \cdots + R\_{n - 1}}{n - 1}\\]
 
 Obvious implementation would be to store all rewards
 and compute the estimate when needed.
@@ -196,7 +196,7 @@ while True:
 	A = numpy.argmax(Q)
     else:
 	A = numpy.random.randint(0, k)
-    # reward recived
+    # reward received
     R = bandit_reward(A)
     # update the estimated action value
     N[A] += 1
@@ -216,6 +216,31 @@ The expression \\((\textit{target} - \textit{old estimate})\\) is the estimate's
 *error* which is reduced by taking a step toward the \\(\textit{target}\\).
 Note that the step-size parameter changes over time steps
 (for \\(n\\)th reward for action \\(a\\) the step-size is \\(\frac{1}{n}\\)).
-Further the step-size parameter is denoted as \\(\alpha\\) or \\(\alpha_t(a)\\).
+Further the step-size parameter is denoted as \\(\alpha\\)
+or \\(\alpha\_t(a)\\).
 
 ### Tracking a Nonstationary Problem
+
+Methods discussed above are not appropriate for *nonstationary* problems
+in which the reward probabilities might change over time.
+In such cases it makes sense to give more weight to recent rewards.
+For example with constant step-size parameter:
+
+\\[Q\_{n + 1} \equiv Q\_n + \alpha (R\_n - Q\_n),\\]
+
+where \\(\alpha \in (0, 1]\\) is the constant step-size parameter.
+\\(Q\_{n + 1}\\) is then a weighted average of past rewards
+and the initial estimate \\(Q\_1\\):
+
+\\[
+Q\_{n + 1} = Q\_n + \alpha (R\_n - Q\_n)
+           = (1 - \alpha)^n Q\_1
+             + \sum\_{i = 1}^n \alpha (1 - \alpha)^{n - i} R\_i.
+\\]
+
+Note that
+\\((1 - \alpha)^n + \sum\_{i = 1}^n \alpha (1 - \alpha)^{n - i} = 1\\)
+and that the weight \\(\alpha (1 - \alpha)^{n - i}\\) of reward \\(R\_i\\)
+depends on how many time steps ago it was observed (\\(n - i\\)).
+The weight decays exponentially with respect to exponent \\(1 - \alpha\\)
+therefore it is called *exponential recency-weighted average*.
