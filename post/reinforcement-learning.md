@@ -185,12 +185,26 @@ Code for complete bandit algorithm with incrementally computed sample averages
 and \\(\varepsilon\\)-greedy action selection:
 
 ```python3
-# TODO implementation
+# estimates of action values
+Q = numpy.zeros(k)
+# numbers of action's selections
+N = numpy.zeros(k)
+
 while True:
-    bandit(a)
+    # choose an action
+    if numpy.random.rand() < 1 - epsilon:
+	A = numpy.argmax(Q)
+    else:
+	A = numpy.random.randint(0, k)
+    # reward recived
+    R = bandit_reward(A)
+    # update the estimated action value
+    N[A] += 1
+    Q[A] += (R - Q[A]) / N[A]
 ```
 
-where `bandit(a)` is function which takes an action
+where `k` is number of actions
+and `bandit_reward(a)` is function which takes an action
 and returns a corresponding reward.
 
 The update rule above occurs frequently and its general form:
