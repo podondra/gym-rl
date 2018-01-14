@@ -244,3 +244,18 @@ and that the weight \\(\alpha (1 - \alpha)^{n - i}\\) of reward \\(R\_i\\)
 depends on how many time steps ago it was observed (\\(n - i\\)).
 The weight decays exponentially with respect to exponent \\(1 - \alpha\\)
 therefore it is called *exponential recency-weighted average*.
+
+### Optimistic Initial Values
+
+All methods metioned above are biased by their intial estimate \\(Q\_1(a)\\).
+In the case of the sample-average methods the bias disappear after each
+action is selected
+but for method with constant \\(\alpha\\) is pernament though descreasing.
+It is easy way to supply prior knowledge to the algorithm.
+
+Initial values might be simple way to encourage exploration.
+If they are set very optimistic whichever action is selected
+its reward is less thant the starting estimate
+thus the agent will switch to other actions.
+This simple technique is called *optimistic intial values*
+and is only usefull for stationary problems.
