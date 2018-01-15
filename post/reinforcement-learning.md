@@ -197,14 +197,14 @@ while True:
     else:
 	A = numpy.random.randint(0, k)
     # reward received
-    R = bandit_reward(A)
+    R = bandit(A)
     # update the estimated action value
     N[A] += 1
     Q[A] += (R - Q[A]) / N[A]
 ```
 
 where `k` is number of actions
-and `bandit_reward(a)` is function which takes an action
+and `bandit(a)` is function which takes an action
 and returns a corresponding reward.
 
 The update rule above occurs frequently and its general form:
@@ -283,3 +283,33 @@ The idea is that the square-root term measures the uncertainty in the
 estimate of an action's value.
 It tries to be upper bound for possible true value
 and \\(c\\) determines the confidence level.
+
+### Contextual Bandits
+
+All methods above considered nonassociative tasks in which the agent do not
+associate different actions with different states.
+The agent only tries to find best action
+or track the best action as it changes over time.
+However in a general reinforcement learning task agent's goal
+it to learn a policy (mapping from situations to its best actions).
+
+*Contextual bandits* tasks are intermediate between \\(k\\)-armed bandit
+and the full reinforcement learning problems.
+It is an *associative search* task as it involves both search for best actions
+and *association* of theses actions with situation they are best for.
+They involve learning a policy but each action affects only the immediate
+reward.
+If action affect the next state as well as the reward then it is a full
+reinforcement learning problem.
+
+## Finite Markov Decision Processes
+
+Now the finite Markov decision processes (finite MDPs) are introduced.
+It involves choosing different actions in different situations.
+MDPs are a classical mathematical formalization of sequential decision making
+where action influence all future rewards so MDPs involve delayed reward
+and the need to trade off between immediate and delayed reward.
+In MDPs the value \\(q\_\*(s, a)\\) of each action \\(a\\) in state \\(s\\)
+or the value \\(v\_\*(s)\\) of each state given optimal action selections.
+
+### The Agent-environment Interface
