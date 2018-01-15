@@ -4,11 +4,11 @@ Category: reinforcement learning
 Tags: reinforcement learning
 
 In this post I would like to introduce reinforcement learning
-because it is currently producing exciting results
-(see [OpenAI] and [DeepMind]).
-and in my opinion leads to general artificial intelligence.
-For further reading please refer to book
+by shortening some chapters from book
 [Reinforcement Learning: An Introduction][sutton2018] by Sutton and Barto.
+Reinforcement learning is currently producing exciting results
+(see [OpenAI] and [DeepMind])
+and in my opinion leads to general artificial intelligence.
 
 [openai]: https://openai.com/ (OpenAI)
 [deepmind]: https://deepmind.com/ (DeepMind)
@@ -247,15 +247,39 @@ therefore it is called *exponential recency-weighted average*.
 
 ### Optimistic Initial Values
 
-All methods metioned above are biased by their intial estimate \\(Q\_1(a)\\).
+All methods mentioned above are biased by their initial estimate \\(Q\_1(a)\\).
 In the case of the sample-average methods the bias disappear after each
 action is selected
-but for method with constant \\(\alpha\\) is pernament though descreasing.
+but for method with constant \\(\alpha\\) is permanent though decreasing.
 It is easy way to supply prior knowledge to the algorithm.
 
 Initial values might be simple way to encourage exploration.
 If they are set very optimistic whichever action is selected
-its reward is less thant the starting estimate
+its reward is less than the starting estimate
 thus the agent will switch to other actions.
-This simple technique is called *optimistic intial values*
-and is only usefull for stationary problems.
+This simple technique is called *optimistic initial values*
+and is only useful for stationary problems.
+
+### Upper-confidence-bound Action Selection
+
+\\(\varepsilon\\)-greedy action selection forces exploration through
+nongreedy actions but without preference for those that are nearly greedy
+or particularly uncertain.
+*Upper confidence bound* (UCB) selects according to their potential for
+being optimal taking into account how close their estimate are to being
+maximal and estimates uncertainties by equation:
+
+\\[
+A\_t \equiv \operatorname{argmax}\_a \left[Q\_t(a) + c
+\sqrt{\frac{\ln t}{N\_t(a)}}\right],
+\\]
+
+where \\(N\_t(a)\\) denotes the number of times that action \\(a\\) has been
+selected prior to time step \\(t\\)
+and \\(c \gt 0\\) controls the degree of exploration.
+When \\(N\_t(a) = 0\\) then \\(a\\) is considered to be maximizing action.
+
+The idea is that the square-root term measures the uncertainty in the
+estimate of an action's value.
+It tries to be upper bound for possible true value
+and \\(c\\) determines the confidence level.
