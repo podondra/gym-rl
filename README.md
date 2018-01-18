@@ -27,6 +27,13 @@ environments.
 [6]: https://pandas.pydata.org/ (Python Data Analysis Library)
 [7]: https://en.wikipedia.org/wiki/Atari_2600 (Atari 2600 Wikipedia)
 
+## Blog Post
+
+The blog post in available on [podondra site][8].
+
+[8]: https://podondra.cz/introduction-to-reinforcement-learning.html
+     (Introduction to Reinforcement Learning Blog Post)
+
 ## References
 
 - Reinforcement Learning: An Introduction,
