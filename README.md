@@ -1,9 +1,9 @@
 # Reinforcement Learning in Gym
 
-This work aims to use reinforcement learning to solve some [gym][1]
+This work aims to use reinforcement learning to solve some [gym]
 environments.
 
-[1]: https://github.com/openai/gym (gym GitHub repository)
+[gym]: https://github.com/openai/gym (gym GitHub repository)
 
 ## Checklist
 
@@ -12,20 +12,25 @@ environments.
 - [ ] make a survey of reinforcement learning algorithms
       which are applicable to gym's problems
 - [ ] implement some algorithms from survey and apply them to gym environments
-    - [ ] some [Atari 2600][7] environments
-    - [ ] *HumanoidFlagrun* from [Roboschool][2]
-    - [ ] *Kick and Defend* [competitive self-play environment][3]
+    - [ ] some [Atari 2600][atari] environments
+    - [ ] *HumanoidFlagrun* from [Roboschool]
+    - [ ] *Kick and Defend* [competitive self-play environment][self-play]
 - [ ] use Python 3.4 or higher
-- [ ] use [pytest][4] to make sure algorithm are correctly implemented
-- [ ] for implementation use [NumPy][5] and [pandas][6]
+- [ ] use [pytest] to make sure algorithm are correctly implemented
+- [ ] for implementation use [NumPy] and [pandas]
 
-[2]: https://blog.openai.com/roboschool/ (Roboschool OpenAI Blog)
-[3]: https://github.com/openai/multiagent-competition
-     (Competitive Multi-Agent Environments)
-[4]: https://docs.pytest.org/en/latest/ (pytest Documentation)
-[5]: http://www.numpy.org/ (NumPy Documentation)
-[6]: https://pandas.pydata.org/ (Python Data Analysis Library)
-[7]: https://en.wikipedia.org/wiki/Atari_2600 (Atari 2600 Wikipedia)
+[roboschool]: https://blog.openai.com/roboschool/ (Roboschool OpenAI Blog)
+[self-play]: https://github.com/openai/multiagent-competition
+             (Competitive Multi-Agent Environments)
+[pytest]: https://docs.pytest.org/en/latest/ (pytest Documentation)
+[numpy]: http://www.numpy.org/ (NumPy Documentation)
+[pandas]: https://pandas.pydata.org/ (Python Data Analysis Library)
+[atari]: https://en.wikipedia.org/wiki/Atari_2600 (Atari 2600 Wikipedia)
+
+## Algorithms for Gym's Problems
+
+[OpenAI Gym][gym] is an open-source toolkit for developing and comparing
+reinforcement learning algorithms.
 
 ## References
 
