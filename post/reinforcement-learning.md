@@ -44,7 +44,7 @@ environment are four main subelements of a reinforcement learning system.
 
 A *policy* is a mapping from perceived stated of the environment to actions
 when in those stated.
-Therefore, it defines the learning agent's behaviour at a given time.
+Therefore, it defines the learning agent's behavior at a given time.
 
 A *reward signal* defines the goal in a reinforcement learning problem.
 It is a single number send to the learning agent by the environment at every
@@ -58,7 +58,7 @@ What an agent can expect to accumulate from a state over the future.
 While a reward signal might be low in some state it might have high value
 as it is usually followed by states that yield high rewards.
 
-The last element is a *model of environment* which mimics the behaviour
+The last element is a *model of environment* which mimics the behavior
 of the environment or allows inferences about how the environment will behave.
 They are used for estimating future situations before they are actually
 experienced (planning).
@@ -71,7 +71,7 @@ functions (except evolutionary methods).
 Reinforcement learning uses training information
 which *evaluates* the actions taken
 rather than *instructs* by giving correct actions.
-Therefore the search for good behaviour is needed.
+Therefore the search for good behavior is needed.
 Purely evaluative feedback indicates how good the action taken was
 so depends entirely on the action.
 Purely instructive feedback indicates the correct action independently of
@@ -82,7 +82,7 @@ action actually taken.
 The \\(k\\)-armed bandit problem is named by analogy to
 [slot machine][slot-machine].
 An agent is repeatedly faced with a choice among \\(k\\) different actions
-in *nonassociative*, *stationary* setting (action taken only in one situation).
+in *non-associative*, *stationary* setting (action taken only in one situation).
 After each choice it receive a numerical reward from a stationary probability
 distribution.
 The objective is to maximize the expected total reward over some *time steps*.
@@ -91,17 +91,17 @@ The objective is to maximize the expected total reward over some *time steps*.
 
 In the \\(k\\)-armed bandit problem each of the \\(k\\) actions has an expected reward
 given that the action is selected (action's value).
-The action selected at time step \\(t\\) is denoted as \\(A_t\\)
-and its reward as \\(R_t\\).
+The action selected at time step \\(t\\) is denoted as \\(A\_t\\)
+and its reward as \\(R\_t\\).
 The value of an arbitrary action \\(a\\) is the expected reward
 given that \\(a\\) is selected:
 
-\\[q\_\*(a) \equiv \mathbb{E}[R\_t | A\_t = a].\\]
+\\[q\_\*(a) \equiv \mathbb{E}(R\_t | A\_t = a).\\]
 
 If the value of each function was known it would be trivial to solve
 the \\(k\\)-armed bandit problem.
 But their are not certainly known although there might be estimates.
-The estimated value of action \\(a\\) at time step \\(t\\) is \\(Q_t(a)\\)
+The estimated value of action \\(a\\) at time step \\(t\\) is \\(Q\_t(a)\\)
 and it should be as close as possible to \\(q_*(a)\\).
 
 ### Exploration and Exploitation
@@ -109,8 +109,8 @@ and it should be as close as possible to \\(q_*(a)\\).
 Actions whose estimated value is greatest are called *greedy* actions.
 Selecting one of these actions is *exploiting* current knowledge of the
 values of the actions.
-If a nongreedy action is selected than an agent is *exploring*
-cause it enables to improve estimate of the nongreedy action.
+If a non-greedy action is selected than an agent is *exploring*
+cause it enables to improve estimate of the non-greedy action.
 Exploitation maximize the expected reward one step
 and exploration may produce greater total reward.
 It is impossible to explore and exploit with any single action selection
@@ -219,9 +219,9 @@ Note that the step-size parameter changes over time steps
 Further the step-size parameter is denoted as \\(\alpha\\)
 or \\(\alpha\_t(a)\\).
 
-### Tracking a Nonstationary Problem
+### Tracking a Non-stationary Problem
 
-Methods discussed above are not appropriate for *nonstationary* problems
+Methods discussed above are not appropriate for *non-stationary* problems
 in which the reward probabilities might change over time.
 In such cases it makes sense to give more weight to recent rewards.
 For example with constant step-size parameter:
@@ -263,7 +263,7 @@ and is only useful for stationary problems.
 ### Upper-confidence-bound Action Selection
 
 \\(\varepsilon\\)-greedy action selection forces exploration through
-nongreedy actions but without preference for those that are nearly greedy
+non-greedy actions but without preference for those that are nearly greedy
 or particularly uncertain.
 *Upper confidence bound* (UCB) selects according to their potential for
 being optimal taking into account how close their estimate are to being
@@ -286,7 +286,7 @@ and \\(c\\) determines the confidence level.
 
 ### Contextual Bandits
 
-All methods above considered nonassociative tasks in which the agent do not
+All methods above considered non-associative tasks in which the agent do not
 associate different actions with different states.
 The agent only tries to find best action
 or track the best action as it changes over time.
@@ -313,3 +313,90 @@ In MDPs the value \\(q\_\*(s, a)\\) of each action \\(a\\) in state \\(s\\)
 or the value \\(v\_\*(s)\\) of each state given optimal action selections.
 
 ### The Agent-environment Interface
+
+MDP is framework for a problem of learning from interaction to achieve a goal.
+The learner is an *agent* interacting with an *environment*
+which is everything outside it.
+The agent select actions and the environment responses to these actions
+and present new situations to the agent.
+One of the responses from environment are the rewards
+which the agent tries to maximize over time through actions.
+
+Agent and environment interact at discrete time steps \\(t = 0, 1, 2, \dots\\).
+At each time step \\(t\\) the agent receives representation of the environment
+*state* \\(S\_t \in \mathcal{S}\\) and based on it selects an action \\(A\_t \in
+\mathcal{A}(s)\\).
+The next step the agent gets a numerical *reward* \\(R\_{t + 1} \in \mathcal{R}
+\subset \mathbb{R}\\) and find itself in a new state \\(S\_{t + 1}\\).
+This loop in MDP can be unrolled into sequence or *trajectory*:
+
+\\[S\_0, A\_0, R\_1, S\_1, A\_1, R\_2, S\_2, A\_2, R\_3, \dots\\] 
+
+In a *finite* MDP sets of states \\(\mathcal{S}\\),
+actions \\(\mathcal{A}\\) and rewards \\(\mathcal{R}\\) are finite.
+Therefore random variables \\(R\_t\\) and \\(S\_t\\) have well defined
+discrete probability distributions dependent only on previous state and action.
+That gives for \\(s' \in \mathcal{S}\\) and \\(r \in \mathcal{R}\\)
+a probability of occurrence at time \\(t\\) given preceding state and action:
+
+\\[p(s', r | s, a) \equiv \mathbb{P}(S\_t = s', R\_t = r | S\_{t - 1} = s,
+A\_{t - 1} = a),\\]
+
+for all \\(s', s \in \mathcal{S}\\), \\(r \in \mathcal{R}\\)
+and \\(a \in \mathcal{A}(s)\\).
+The function \\(p: \mathcal{S} \times \mathcal{R} \times \mathcal{S} \times
+\mathcal{A} \to [0, 1]\\) is ordinary deterministic function of four
+arguments.
+The probabilities give by the function \\(p\\) completely characterize the
+dynamics of a finite MDP
+and other useful quantities can be derived from it
+as *state-transition probabilities*:
+
+\\[p(s' | s, a) \equiv \mathbb{P}(S\_t = s' | S\_{t - 1} = s,
+A\_{t - 1} = a) = \sum\_{r \in \mathcal{R}} p(s', r | s, a),\\]
+
+expected reward for each state and action as function
+\\(r: \mathcal{S} \times \mathcal{A} \to \mathbb{R}\\):
+
+\\[r(s, a) \equiv \mathbb{E}(R\_t | S\_{t - 1} = s, A\_{t - 1} = a)
+= \sum\_{r \in \mathcal{R}} r \sum\_{s' \in \mathcal{S}} p(s', r | s, a)\\]
+
+or expected reward for state, action and next-state triples
+\\(r: \mathcal{S} \times \mathcal{A} \times \mathcal{S} \to \mathbb{R}\\):
+
+\\[r(s, a, s') \equiv \mathbb{E}(R\_t | S\_{t - 1} = s, A\_{t - 1} = a,
+S\_t = s') = \sum\_{r \in \mathcal{R}} r
+\frac{p(s', r | s, a)}{p(s' | s, a)}.\\]
+
+The MDP framework is abstract and very flexible and can describe many different
+problems in many different ways.
+It is an abstraction of the problem of goal-directed learning from interaction.
+MDP reduces any such problem to three signals passing between an agent
+and its environment:
+
+- signal to make choices, actions,
+- signal to represent the basis for choices, states and
+- signal to define agent's goal, rewards.
+
+### Goals and Rewards
+
+The agent's goal is to maximize the total amount of reward
+\\(R\_t \in \mathbb{R}\\) it receives.
+This means maximizing cumulative reward in the long run
+not only the immediate reward.
+This idea is given as *reward hypothesis*
+that all of what we mean by goals and purposes can be well thought of as
+the maximization of the expected value of the cumulative sum of a received
+scalar signal.
+
+Consider a game of Go.
+An agent might get a reward of -1 for losing the game
+and 1 for winning the game.
+The agent always learns to maximize its reward
+so it is important to provide reward in such way that the agent
+when maximizing its reward will also achieve goal given.
+The reward signal is not the place to impart
+*how* the agent such achieve something but rather *what* to achieve.
+For example there such be no rewards during the game of Go for some
+intermediate accomplishments as the agent might learn to achieve theses subgoals
+without learning to win the game.
