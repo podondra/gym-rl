@@ -390,8 +390,8 @@ the maximization of the expected value of the cumulative sum of a received
 scalar signal.
 
 Consider a game of Go.
-An agent might get a reward of -1 for losing the game
-and 1 for winning the game.
+An agent might get a reward of \\(-1\\) for losing the game
+and \\(1\\) for winning the game.
 The agent always learns to maximize its reward
 so it is important to provide reward in such way that the agent
 when maximizing its reward will also achieve goal given.
