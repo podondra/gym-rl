@@ -38,15 +38,15 @@ reinforcement learning algorithms.
   http://incompleteideas.net/book/bookdraft2017nov5.pdf
 - Emergent Complexity via Multi-Agent Competition,
   https://arxiv.org/abs/1710.03748
-- OpenAI: Deep Reinforcement Learning: A Tutorial
+- OpenAI's Deep Reinforcement Learning: A Tutorial,
   https://web.archive.org/web/20160830014637/https://gym.openai.com/docs/rl
-- OpenAI Baselines
+- OpenAI Baselines,
   https://github.com/openai/baselines
-- Roboschool
+- Roboschool,
   https://github.com/openai/roboschool
-- OpenAI Gym Paper
+- OpenAI Gym Paper,
   https://arxiv.org/abs/1606.01540
-- OpenAI Gym Tutorial
+- OpenAI Gym Tutorial,
   https://gym.openai.com/docs/
-- DQN Paper in Nature
+- DQN Paper in Nature,
   https://storage.googleapis.com/deepmind-media/dqn/DQNNaturePaper.pdf
