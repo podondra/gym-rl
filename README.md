@@ -32,13 +32,28 @@ environments.
 [OpenAI Gym][gym] is an open-source toolkit for developing and comparing
 reinforcement learning algorithms.
 
+Try Cross-entropy method to problem
+proposed in [Deep Reinforcement Learning Tutorial][deep-rl],
+[Learning Tetris Using the Noisy Cross-Entropy Method][tetris]
+and [The Cross-Entropy Method Optimizes for Quantiles][xentropy].
+
+[deep-rl]: https://web.archive.org/web/20160830014637/https://gym.openai.com/docs/rl
+[tetris]: http://ie.technion.ac.il/CE/files/papers/Learning%20Tetris%20Using%20the%20Noisy%20Cross-Entropy%20Method.pdf
+[xentropy]: http://proceedings.mlr.press/v28/goschin13.pdf
+
 ## References
 
 - Reinforcement Learning: An Introduction,
   http://incompleteideas.net/book/bookdraft2017nov5.pdf
+- Learning from Delayed Rewards,
+  http://www.cs.rhul.ac.uk/~chrisw/thesis.html
+- Dynamic Programming and Optimal Control,
+  http://web.mit.edu/dimitrib/www/dpchapter.html
+- Learning Reinforcement Learning,
+  http://www.wildml.com/2016/10/learning-reinforcement-learning/
 - Emergent Complexity via Multi-Agent Competition,
   https://arxiv.org/abs/1710.03748
-- OpenAI's Deep Reinforcement Learning: A Tutorial,
+- Deep Reinforcement Learning: A Tutorial,
   https://web.archive.org/web/20160830014637/https://gym.openai.com/docs/rl
 - OpenAI Baselines,
   https://github.com/openai/baselines
