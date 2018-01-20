@@ -1,5 +1,8 @@
 refs/
 
+# Backup files of aspell
+*.bak
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

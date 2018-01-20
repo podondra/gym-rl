@@ -41,6 +41,13 @@ and [The Cross-Entropy Method Optimizes for Quantiles][xentropy].
 [tetris]: http://ie.technion.ac.il/CE/files/papers/Learning%20Tetris%20Using%20the%20Noisy%20Cross-Entropy%20Method.pdf
 [xentropy]: http://proceedings.mlr.press/v28/goschin13.pdf
 
+## Blog Post
+
+The blog post in available on [podondra site][8].
+
+[8]: https://podondra.cz/introduction-to-reinforcement-learning.html
+     (Introduction to Reinforcement Learning Blog Post)
+
 ## References
 
 - Reinforcement Learning: An Introduction,
