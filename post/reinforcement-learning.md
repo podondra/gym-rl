@@ -433,3 +433,31 @@ for all \\(s \in \mathcal{S}\\), \\(a \in \mathcal{A}(s)\\)
 and \\(s' \in \mathcal{S^+}\\).
 Dynamic programming makes these equations into iterative update rules
 for improving approximations of the desired value functions.
+
+### Policy Evaluation
+
+Consider how to compute state-value function \\(v\_{\pi}\\) for a given policy
+\\(\pi\\). This is referred as *policy evaluation* or *prediction problem*.
+
+Having a sequence of approximate value function \\(v\_0, v\_1, v\_2, \dots\\)
+each mapping \\(\mathcal{S^+} \to \mathbb{R}\\).
+The first approximation \\(v\_0\\) is chosen arbitrarily.
+Only the terminal state must have value \\(0\\).
+Then each next approximation is obtained by using the Bellman equation
+for \\(v\_{\pi}\\) as an update rule:
+
+\\[
+v\_{k + 1}(s) = \max\_a \sum\_{s', r} p(s', r | s, a)
+\big[r + \gamma v\_{k}(s')\big],
+\\]
+
+for all \\(s \in \mathcal{S}\\). In general the sequence
+\\(\\{v\_k\\}\_{k = 0}^{\infty}\\) can be shown to converge to \\(v\_{\pi}\\).
+This algorithm is called *iterative policy evaluation*.
+
+When implementing the algorithm a usual way would be to use two arrays,
+one for old values \\(v\_k(s)\\), one for new values \\(v\_{k + 1}(s)\\)
+and the new values would be computed base on the old values.
+But it is easier to implement it as in-place procedure with only one array
+which also converges to \\(v\_{\pi}\\)
+and usually converges faster because it has more recent data available sooner.
