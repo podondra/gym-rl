@@ -400,3 +400,36 @@ The reward signal is not the place to impart
 For example there such be no rewards during the game of Go for some
 intermediate accomplishments as the agent might learn to achieve theses subgoals
 without learning to win the game.
+
+TODO extend MDP section.
+
+## Dynamic Programming
+
+Dynamic programming refers to collection of algorithms used for computing
+optimal policies
+when a perfect model of the environment is given as a MDP.
+These algorithms are limited by their assumptions that the MDP is fully known
+and because they are very computationally demanding.
+But their are very important as other algorithm might be viewed
+as attempting the same effect as dynamic programming
+but more effectively and without full knowledge of the environment.
+
+The main idea of dynamic programming is to use value functions to structure
+the search for good policies via Bellman optimality equations:
+
+\\[
+v\_\*(s) = \max\_a \sum\_{s', r} p(s', r | s, a)
+\big[r + \gamma v\_\*(s')\big]
+\\]
+
+or
+
+\\[
+q\_\*(s, a) = \sum\_{s', r} p(s', r | s, a)
+\big[r + \gamma \max\_{a'} q\_\*(s', a')\big],
+\\]
+
+for all \\(s \in \mathcal{S}\\), \\(a \in \mathcal{A}(s)\\)
+and \\(s' \in \mathcal{S^+}\\).
+Dynamic programming makes these equations into iterative update rules
+for improving approximations of the desired value functions.
