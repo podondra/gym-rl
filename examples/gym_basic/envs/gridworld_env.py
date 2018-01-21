@@ -15,6 +15,8 @@ class GridWorldEnv(gym.Env):
         self.P = numpy.zeros((self.action_space.n,
                               self.observation_space.n,
                               self.observation_space.n))
+        # any action taken in terminal state has no effect
+        self.P[:, 0, 0] = 1.0
 
         for s in gridworld.flat[1:-1]:
             row, col = numpy.argwhere(gridworld == s)[0]
@@ -24,4 +26,6 @@ class GridWorldEnv(gym.Env):
                 s_prime = gridworld[next_row, next_col]
                 self.P[a, s, s_prime] = 1.0
 
-        self.R = numpy.full((self.action_space.n, self.observation_space.n), -1)
+        self.R = numpy.full((self.action_space.n,
+                             self.observation_space.n), -1)
+        self.R[:, 0] = 0.0
