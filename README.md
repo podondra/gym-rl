@@ -52,6 +52,8 @@ The blog post in available on [podondra site][8].
 
 - Reinforcement Learning: An Introduction,
   http://incompleteideas.net/book/bookdraft2017nov5.pdf
+- RL Course by David Silver,
+  https://www.youtube.com/watch?v=2pWv7GOvuf0
 - Learning from Delayed Rewards,
   http://www.cs.rhul.ac.uk/~chrisw/thesis.html
 - Dynamic Programming and Optimal Control,
