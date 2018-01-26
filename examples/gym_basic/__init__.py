@@ -8,3 +8,7 @@ register(
         id='WindyGridWorld-v0',
         entry_point='gym_basic.envs:WindyGridWorldEnv',
         )
+register(
+        id='Cliff-v0',
+        entry_point='gym_basic.envs:CliffEnv',
+        )
