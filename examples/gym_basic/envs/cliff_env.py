@@ -1,6 +1,5 @@
 import gym
-from gym import error, spaces, utils
-from gym.utils import seeding
+from gym import spaces
 
 
 class CliffEnv(gym.Env):
@@ -27,8 +26,8 @@ class CliffEnv(gym.Env):
         self.S = self.S[0] + x, self.S[1] + y
 
         self.S = max(0, self.S[0]), max(0, self.S[1])
-        self.S = min(self.S[0], self.height - 1), \
-                 min(self.S[1], self.width - 1)
+        self.S = (min(self.S[0], self.height - 1),
+                  min(self.S[1], self.width - 1))
 
         if self.S == (self.height - 1, self.width - 1):
             return self.S, -1, True, {}

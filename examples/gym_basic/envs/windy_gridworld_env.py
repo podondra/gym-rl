@@ -1,6 +1,5 @@
 import gym
-from gym import error, spaces, utils
-from gym.utils import seeding
+from gym import spaces
 
 
 class WindyGridWorldEnv(gym.Env):
@@ -34,8 +33,8 @@ class WindyGridWorldEnv(gym.Env):
         self.S = self.S[0] + x, self.S[1] + y
 
         self.S = max(0, self.S[0]), max(0, self.S[1])
-        self.S = min(self.S[0], self.height - 1), \
-                 min(self.S[1], self.width - 1)
+        self.S = (min(self.S[0], self.height - 1),
+                  min(self.S[1], self.width - 1))
 
         if self.S == (3, 7):
             return self.S, -1, True, {}
