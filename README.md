@@ -41,6 +41,23 @@ and [The Cross-Entropy Method Optimizes for Quantiles][xentropy].
 [tetris]: http://ie.technion.ac.il/CE/files/papers/Learning%20Tetris%20Using%20the%20Noisy%20Cross-Entropy%20Method.pdf
 [xentropy]: http://proceedings.mlr.press/v28/goschin13.pdf
 
+For Atari 2600 games it is obvious to use [Deep Q-network][dqn]
+and its variants [Double Q-learning][double]
+or [Prioritized experience replay][prioritized].
+
+[dqn]: https://storage.googleapis.com/deepmind-media/dqn/DQNNaturePaper.pdf
+[double]: https://arxiv.org/abs/1509.06461
+[prioritized]: https://arxiv.org/abs/1511.05952
+
+The HumanoidFlagrun problem might be solved by algorithms proposed in
+[PPO blog post][ppo].
+
+[ppo]: https://blog.openai.com/openai-baselines-ppo/
+
+Competitive Self-play is address in [blog post by OpenAI][self-play-blog].
+
+[self-play-blog]: https://blog.openai.com/competitive-self-play/
+
 ## Blog Post
 
 The blog post in available on [podondra site][8].
@@ -51,7 +68,7 @@ The blog post in available on [podondra site][8].
 ## References
 
 - Reinforcement Learning: An Introduction,
-  http://incompleteideas.net/book/bookdraft2017nov5.pdf
+  http://incompleteideas.net/book/the-book-2nd.html
 - RL Course by David Silver,
   https://www.youtube.com/watch?v=2pWv7GOvuf0
 - Learning from Delayed Rewards,
