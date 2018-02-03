@@ -44,10 +44,14 @@ and [The Cross-Entropy Method Optimizes for Quantiles][xentropy].
 For Atari 2600 games it is obvious to use [Deep Q-network][dqn]
 and its variants [Double Q-learning][double]
 or [Prioritized experience replay][prioritized].
+[DeepMind's blog post][drl] is about this problem and it moreover
+introduce [A3C] as solution method for Atari 2600 games
 
 [dqn]: https://storage.googleapis.com/deepmind-media/dqn/DQNNaturePaper.pdf
 [double]: https://arxiv.org/abs/1509.06461
 [prioritized]: https://arxiv.org/abs/1511.05952
+[dlr]: https://deepmind.com/blog/deep-reinforcement-learning/
+[a3c]: https://arxiv.org/pdf/1602.01783.pdf
 
 The HumanoidFlagrun problem might be solved by algorithms proposed in
 [PPO blog post][ppo].
