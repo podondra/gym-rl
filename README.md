@@ -5,6 +5,11 @@ environments.
 
 [gym]: https://github.com/openai/gym (gym GitHub repository)
 
+It also uses OpenAI [gym-gridworlds] environments
+that implemented myself.
+
+[gym-gridworlds]: https://github.com/podondra/gym-gridworlds
+
 ## Setup
 
 	$ git clone https://github.com/podondra/gym-rl
