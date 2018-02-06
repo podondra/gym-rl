@@ -5,6 +5,12 @@ environments.
 
 [gym]: https://github.com/openai/gym (gym GitHub repository)
 
+## Setup
+
+	$ git clone https://github.com/podondra/gym-rl
+	$ git submodule init
+	$ git submodule update
+
 ## Checklist
 
 - [ ] write an introductory blog post about reinforcement learning
