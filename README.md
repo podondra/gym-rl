@@ -1,4 +1,4 @@
-# Reinforcement Learning in Gym
+# Reinforcement Learning in gym
 
 This work aims to use reinforcement learning to solve some [gym]
 environments.
@@ -38,7 +38,13 @@ that implemented myself.
 [pandas]: https://pandas.pydata.org/ (Python Data Analysis Library)
 [atari]: https://en.wikipedia.org/wiki/Atari_2600 (Atari 2600 Wikipedia)
 
-## Algorithms for Gym's Problems
+## Blog Post
+
+The blog post will be available on [podondra site][site].
+
+[site]: https://podondra.cz
+
+## Algorithms for gym's Problems
 
 [OpenAI Gym][gym] is an open-source toolkit for developing and comparing
 reinforcement learning algorithms.
@@ -73,36 +79,19 @@ Competitive Self-play is address in [blog post by OpenAI][self-play-blog].
 
 [self-play-blog]: https://blog.openai.com/competitive-self-play/
 
-## Blog Post
-
-The blog post in available on [podondra site][8].
-
-[8]: https://podondra.cz/introduction-to-reinforcement-learning.html
-     (Introduction to Reinforcement Learning Blog Post)
-
 ## References
 
-- Reinforcement Learning: An Introduction,
-  http://incompleteideas.net/book/the-book-2nd.html
-- RL Course by David Silver,
-  https://www.youtube.com/watch?v=2pWv7GOvuf0
-- Learning from Delayed Rewards,
-  http://www.cs.rhul.ac.uk/~chrisw/thesis.html
-- Dynamic Programming and Optimal Control,
-  http://web.mit.edu/dimitrib/www/dpchapter.html
-- Learning Reinforcement Learning,
-  http://www.wildml.com/2016/10/learning-reinforcement-learning/
-- Emergent Complexity via Multi-Agent Competition,
-  https://arxiv.org/abs/1710.03748
-- Deep Reinforcement Learning: A Tutorial,
-  https://web.archive.org/web/20160830014637/https://gym.openai.com/docs/rl
-- OpenAI Baselines,
-  https://github.com/openai/baselines
-- Roboschool,
-  https://github.com/openai/roboschool
-- OpenAI Gym Paper,
-  https://arxiv.org/abs/1606.01540
-- OpenAI Gym Tutorial,
-  https://gym.openai.com/docs/
-- DQN Paper in Nature,
-  https://storage.googleapis.com/deepmind-media/dqn/DQNNaturePaper.pdf
+- [Reinforcement Learning: An Introduction](http://incompleteideas.net/book/the-book-2nd.html)
+- [RL Course by David Silver](https://www.youtube.com/watch?v=2pWv7GOvuf0)
+- [Learning from Delayed Rewards](http://www.cs.rhul.ac.uk/~chrisw/thesis.html)
+- [Dynamic Programming and Optimal Control](http://web.mit.edu/dimitrib/www/dpchapter.html)
+- [Learning Reinforcement Learning](http://www.wildml.com/2016/10/learning-reinforcement-learning/)
+- [Emergent Complexity via Multi-Agent Competition](https://arxiv.org/abs/1710.03748)
+- [Deep Reinforcement Learning: A Tutorial](https://web.archive.org/web/20160830014637/https://gym.openai.com/docs/rl)
+- [OpenAI Baselines](https://github.com/openai/baselines)
+- [Roboschool](https://github.com/openai/roboschool)
+- [OpenAI Gym Paper](https://arxiv.org/abs/1606.01540)
+- [OpenAI Gym Tutorial](https://gym.openai.com/docs/)
+- [DQN Paper in Nature](https://storage.googleapis.com/deepmind-media/dqn/DQNNaturePaper.pdf)
+- [Deep Reinforcement Learning: Pong from Pixels](http://karpathy.github.io/2016/05/31/rl/)
+- [John Schulman: Deep Reinforcement Learning](https://www.youtube.com/watch?v=aUrX-rP_ss4)
