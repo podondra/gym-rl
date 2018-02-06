@@ -3,6 +3,19 @@ Date: 2018-01-04 08:03
 Category: reinforcement learning
 Tags: reinforcement learning
 
+## Outline
+
+1. Introduction
+2. Finite Markov Decision Processes
+3. Dynamic Programming
+4. Monte Carlo Methods
+5. Temporal-Difference Learning
+6. Approximate Solution Methods
+7. Exploration and Exploitation
+8. References
+
+## Introduction
+
 In this post I would like to introduce reinforcement learning
 by shortening some chapters from book
 [Reinforcement Learning: An Introduction][sutton2018] by Sutton and Barto.
