@@ -1,7 +1,7 @@
 Title: Survey of Algorithm for OpenAI gym Problems
 Date: 2018-02-07
 Category: reinforcement learning
-Tags: reinforcement learning
+Tags: reinforcement learning, gym
 
 In this survey I list and give brief summary of algorithm applicable to
 [OpenAI gym][gym] environments.
@@ -18,13 +18,36 @@ There are algorithms for classic control, Atari games, Humanoid walking.
 
 ## Deep Q-network
 
+[DQN] is an artificial agent that can learn policies directly from
+high-dimensional sensory inputs using end-to-end reinforcement learning.
+Receiving only the pixels and the game score of Atari 2600 games as inputs
+it is able to achieve a level comparable to human game tester across 49 games
+using same network architecture and hyperparameters.
+
+It combines reinforcement learning with deep convolutional neural networks.
+Moreover it addresses the problem of learning instability by using experience
+replay and iterative updates of action-values toward target values only
+periodically.
+
 [dqn]: https://storage.googleapis.com/deepmind-media/dqn/DQNNaturePaper.pdf
 
-## Double Q-learning
+## Deep Reinforcement Learning with Double Q-learning
+
+[Double DQN][double-dqn] is adaptation to DQN algorithm that prevents
+substantial overestimations particularly in some games in the Atari 2600 games.
+Generally Q-learning is known to sometimes learn unrealistically high action
+values because it includes a maximization step over estimated action values,
+which tends to prefer overestimated to underestimated values.
 
 [double-dqn]: https://arxiv.org/abs/1509.06461
 
 ## Prioritized Experience Replay
+
+[Prioritized experience replay][prioritized] is general method that lets
+online reinforcement algorithm remember and reuse past.
+It can be applied to DQN which uses uniform sampling.
+However, this prioritized experience so as to replay important transitions
+more frequently and therefore learn more efficiently.
 
 [prioritized]: https://arxiv.org/abs/1511.05952
 
