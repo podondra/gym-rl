@@ -67,7 +67,7 @@ introduce [A3C] as solution method for Atari 2600 games
 [dqn]: https://storage.googleapis.com/deepmind-media/dqn/DQNNaturePaper.pdf
 [double]: https://arxiv.org/abs/1509.06461
 [prioritized]: https://arxiv.org/abs/1511.05952
-[dlr]: https://deepmind.com/blog/deep-reinforcement-learning/
+[drl]: https://deepmind.com/blog/deep-reinforcement-learning/
 [a3c]: https://arxiv.org/pdf/1602.01783.pdf
 
 The HumanoidFlagrun problem might be solved by algorithms proposed in
