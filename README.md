@@ -44,46 +44,11 @@ The blog post will be available on [podondra site][site].
 
 [site]: https://podondra.cz
 
-## Algorithms for gym's Problems
-
-[OpenAI Gym][gym] is an open-source toolkit for developing and comparing
-reinforcement learning algorithms.
-
-Try Cross-entropy method to problem
-proposed in [Deep Reinforcement Learning Tutorial][deep-rl],
-[Learning Tetris Using the Noisy Cross-Entropy Method][tetris]
-and [The Cross-Entropy Method Optimizes for Quantiles][xentropy].
-
-[deep-rl]: https://web.archive.org/web/20160830014637/https://gym.openai.com/docs/rl
-[tetris]: http://ie.technion.ac.il/CE/files/papers/Learning%20Tetris%20Using%20the%20Noisy%20Cross-Entropy%20Method.pdf
-[xentropy]: http://proceedings.mlr.press/v28/goschin13.pdf
-
-For Atari 2600 games it is obvious to use [Deep Q-network][dqn]
-and its variants [Double Q-learning][double]
-or [Prioritized experience replay][prioritized].
-[DeepMind's blog post][drl] is about this problem and it moreover
-introduce [A3C] as solution method for Atari 2600 games
-
-[dqn]: https://storage.googleapis.com/deepmind-media/dqn/DQNNaturePaper.pdf
-[double]: https://arxiv.org/abs/1509.06461
-[prioritized]: https://arxiv.org/abs/1511.05952
-[dlr]: https://deepmind.com/blog/deep-reinforcement-learning/
-[a3c]: https://arxiv.org/pdf/1602.01783.pdf
-
-The HumanoidFlagrun problem might be solved by algorithms proposed in
-[PPO blog post][ppo].
-
-[ppo]: https://blog.openai.com/openai-baselines-ppo/
-
-Competitive Self-play is address in [blog post by OpenAI][self-play-blog].
-
-[self-play-blog]: https://blog.openai.com/competitive-self-play/
-
 ## References
 
 - [Reinforcement Learning: An Introduction](http://incompleteideas.net/book/the-book-2nd.html)
-- [RL Course by David Silver](https://www.youtube.com/watch?v=2pWv7GOvuf0)
-- [Learning from Delayed Rewards](http://www.cs.rhul.ac.uk/~chrisw/thesis.html)
+- [David Silver: Reinforcement Learning Course](http://www0.cs.ucl.ac.uk/staff/d.silver/web/Teaching.html)
+- [John Schulman: Deep Reinforcement Learning](https://www.youtube.com/watch?v=aUrX-rP_ss4)
 - [Dynamic Programming and Optimal Control](http://web.mit.edu/dimitrib/www/dpchapter.html)
 - [Learning Reinforcement Learning](http://www.wildml.com/2016/10/learning-reinforcement-learning/)
 - [Emergent Complexity via Multi-Agent Competition](https://arxiv.org/abs/1710.03748)
@@ -94,4 +59,4 @@ Competitive Self-play is address in [blog post by OpenAI][self-play-blog].
 - [OpenAI Gym Tutorial](https://gym.openai.com/docs/)
 - [DQN Paper in Nature](https://storage.googleapis.com/deepmind-media/dqn/DQNNaturePaper.pdf)
 - [Deep Reinforcement Learning: Pong from Pixels](http://karpathy.github.io/2016/05/31/rl/)
-- [John Schulman: Deep Reinforcement Learning](https://www.youtube.com/watch?v=aUrX-rP_ss4)
+- [Learning from Delayed Rewards](http://www.cs.rhul.ac.uk/~chrisw/thesis.html)
