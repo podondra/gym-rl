@@ -95,3 +95,4 @@ Competitive Self-play is address in [blog post by OpenAI][self-play-blog].
 - [DQN Paper in Nature](https://storage.googleapis.com/deepmind-media/dqn/DQNNaturePaper.pdf)
 - [Deep Reinforcement Learning: Pong from Pixels](http://karpathy.github.io/2016/05/31/rl/)
 - [John Schulman: Deep Reinforcement Learning](https://www.youtube.com/watch?v=aUrX-rP_ss4)
+- [Berkeley Deep RL Course](http://rll.berkeley.edu/deeprlcourse/)
