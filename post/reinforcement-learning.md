@@ -37,12 +37,12 @@ Gets rewards (for staying balanced, navigate to target location and so on).
 Reinforcement learning has many faces.
 It is in intersection of:
 
-1. computer science (machine learning),
-2. neuroscience (reward system),
-3. psychology,
-4. economics,
-5. mathematics and
-6. engineering (optimal control).
+- computer science (machine learning),
+- neuroscience (reward system),
+- psychology,
+- economics,
+- mathematics and
+- engineering (optimal control).
 
 ### Basic Concepts
 
@@ -85,106 +85,59 @@ Value function methods includes dynamic programming, Monte Carlo methods,
 temporal-difference learning and function approximation.
 It their intersection are actor-critic methods.
 
-## Markov Decision Process
+## Markov Decision Processes
 
-Now the finite Markov decision processes (finite MDPs) are introduced.
-It involves choosing different actions in different situations.
-MDPs are a classical mathematical formalization of sequential decision making
-where action influence all future rewards so MDPs involve delayed reward
-and the need to trade off between immediate and delayed reward.
-In MDPs the value \\(q\_\*(s, a)\\) of each action \\(a\\) in state \\(s\\)
-or the value \\(v\_\*(s)\\) of each state given optimal action selections.
+Markov decision processes formally describe an environment for reinforcement
+learning.
+They are mathematically idealized from of reinforcement learning problems.
+Key elements are returns, value functions and Bellman equations.
 
-### The Agent-environment Interface
-
-MDP is framework for a problem of learning from interaction to achieve a goal.
-The learner is an *agent* interacting with an *environment*
-which is everything outside it.
-The agent select actions and the environment responses to these actions
-and present new situations to the agent.
-One of the responses from environment are the rewards
-which the agent tries to maximize over time through actions.
-
+In MDP the learner is an *agent* interacting with an *environment*.
 Agent and environment interact at discrete time steps \\(t = 0, 1, 2, \dots\\).
-At each time step \\(t\\) the agent receives representation of the environment
-*state* \\(S\_t \in \mathcal{S}\\) and based on it selects an action \\(A\_t \in
-\mathcal{A}(s)\\).
-The next step the agent gets a numerical *reward* \\(R\_{t + 1} \in \mathcal{R}
-\subset \mathbb{R}\\) and find itself in a new state \\(S\_{t + 1}\\).
-This loop in MDP can be unrolled into sequence or *trajectory*:
+The agent selects and action \\(A\_t \in \mathcal{A(s)}\\) and the environment
+responses with reward \\(R\_{t + 1} \in \mathbb{R}\\) and next state
+\\(S\_{t + 1} \in \mathcal{S}\\) and so forth.
+This loop in MDP can be unrolled into a *trajectory*:
 
 \\[S\_0, A\_0, R\_1, S\_1, A\_1, R\_2, S\_2, A\_2, R\_3, \dots\\] 
 
-In a *finite* MDP sets of states \\(\mathcal{S}\\),
-actions \\(\mathcal{A}\\) and rewards \\(\mathcal{R}\\) are finite.
-Therefore random variables \\(R\_t\\) and \\(S\_t\\) have well defined
-discrete probability distributions dependent only on previous state and action.
-That gives for \\(s' \in \mathcal{S}\\) and \\(r \in \mathcal{R}\\)
-a probability of occurrence at time \\(t\\) given preceding state and action:
+That gives a probability of occurrence for \\(s' \in \mathcal{S}\\) and
+\\(r \in \mathcal{R}\\) at time \\(t\\) given preceding state and action:
 
 \\[p(s', r | s, a) \equiv \mathbb{P}(S\_t = s', R\_t = r | S\_{t - 1} = s,
 A\_{t - 1} = a),\\]
 
 for all \\(s', s \in \mathcal{S}\\), \\(r \in \mathcal{R}\\)
 and \\(a \in \mathcal{A}(s)\\).
-The function \\(p: \mathcal{S} \times \mathcal{R} \times \mathcal{S} \times
-\mathcal{A} \to [0, 1]\\) is ordinary deterministic function of four
-arguments.
+The function
+\\(p: \mathcal{S} \times \mathbb{R} \times \mathcal{S} \times \mathcal{A} \to [0, 1]\\)
+is ordinary deterministic function of four arguments.
 The probabilities give by the function \\(p\\) completely characterize the
-dynamics of a finite MDP
-and other useful quantities can be derived from it
-as *state-transition probabilities*:
+dynamics of a finite MDP.
 
-\\[p(s' | s, a) \equiv \mathbb{P}(S\_t = s' | S\_{t - 1} = s,
-A\_{t - 1} = a) = \sum\_{r \in \mathcal{R}} p(s', r | s, a),\\]
+The agent's goal is to maximize *expected return*, the total amount of reward
+\\(R\_t\\):
 
-expected reward for each state and action as function
-\\(r: \mathcal{S} \times \mathcal{A} \to \mathbb{R}\\):
+\\[G\_t \equiv \sum\_{k = t + 1}^T \gamma^{k - t - 1} R\_k,\\]
 
-\\[r(s, a) \equiv \mathbb{E}(R\_t | S\_{t - 1} = s, A\_{t - 1} = a)
-= \sum\_{r \in \mathcal{R}} r \sum\_{s' \in \mathcal{S}} p(s', r | s, a)\\]
-
-or expected reward for state, action and next-state triples
-\\(r: \mathcal{S} \times \mathcal{A} \times \mathcal{S} \to \mathbb{R}\\):
-
-\\[r(s, a, s') \equiv \mathbb{E}(R\_t | S\_{t - 1} = s, A\_{t - 1} = a,
-S\_t = s') = \sum\_{r \in \mathcal{R}} r
-\frac{p(s', r | s, a)}{p(s' | s, a)}.\\]
-
-The MDP framework is abstract and very flexible and can describe many different
-problems in many different ways.
-It is an abstraction of the problem of goal-directed learning from interaction.
-MDP reduces any such problem to three signals passing between an agent
-and its environment:
-
-- signal to make choices, actions,
-- signal to represent the basis for choices, states and
-- signal to define agent's goal, rewards.
-
-### Goals and Rewards
-
-The agent's goal is to maximize the total amount of reward
-\\(R\_t \in \mathbb{R}\\) it receives.
-This means maximizing cumulative reward in the long run
-not only the immediate reward.
-This idea is given as *reward hypothesis*
-that all of what we mean by goals and purposes can be well thought of as
-the maximization of the expected value of the cumulative sum of a received
-scalar signal.
+where \\(\gamma \in [0, 1]\\) is an discount rate and \\(T\\) is time horizont
+which might be infinity but then \\(\gamma \neq 1\\) else the sum will not be
+finite.
+This is necessary due to distintion between continuing and episodic tasks.
 
 Consider a game of Go.
-An agent might get a reward of \\(-1\\) for losing the game
-and \\(1\\) for winning the game.
-The agent always learns to maximize its reward
-so it is important to provide reward in such way that the agent
-when maximizing its reward will also achieve goal given.
-The reward signal is not the place to impart
-*how* the agent such achieve something but rather *what* to achieve.
+An agent might get a reward of -1 for losing the game and 1 for winning the
+game.
+The agent always learns to maximize its reward so it is important to provide
+reward in such way that the agent when maximizing its reward will also achieve
+goal given.
+The reward signal is not the place to impart *how* the agent such achieve
+something but rather *what* to achieve.
 For example there such be no rewards during the game of Go for some
-intermediate accomplishments as the agent might learn to achieve theses subgoals
-without learning to win the game.
+intermediate accomplishments as the agent might learn to achieve these
+subgoals without learning to win the game.
 
-TODO extend MDP section.
+### Policies and Value Functions
 
 ## Dynamic Programming
 
@@ -505,4 +458,4 @@ reinforcement learning problem.
 - John Schulman, [Deep Reinforcement Learning][schulman-course]
 
 [ucl-course]: http://www0.cs.ucl.ac.uk/staff/d.silver/web/Teaching.html
-[shulman-course]: https://www.youtube.com/watch?v=aUrX-rP_ss4
+[schulman-course]: https://www.youtube.com/watch?v=aUrX-rP_ss4
