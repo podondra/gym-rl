@@ -120,10 +120,10 @@ The agent's goal is to maximize *expected return*, the total amount of reward
 
 \\[G\_t \equiv \sum\_{k = t + 1}^T \gamma^{k - t - 1} R\_k,\\]
 
-where \\(\gamma \in [0, 1]\\) is an discount rate and \\(T\\) is time horizont
+where \\(\gamma \in [0, 1]\\) is an discount rate and \\(T\\) is time horizon
 which might be infinity but then \\(\gamma \neq 1\\) else the sum will not be
 finite.
-This is necessary due to distintion between continuing and episodic tasks.
+This is necessary due to distinction between continuing and episodic tasks.
 
 Consider a game of Go.
 An agent might get a reward of -1 for losing the game and 1 for winning the
@@ -205,15 +205,6 @@ TODO Monte Carlo methods.
 ## Temporal-Difference Learning
 
 TODO temporal-difference learning.
-
-## Approximate Solution Methods
-
-TODO only briefly mention value function approximation
-and policy gradient methods.
-
-Deep reinforcement learning is branch of field using non-linear function
-approximators.
-Usually updating parameters with stochastic gradient descent.
 
 ## Exploration and Exploitation
 
@@ -450,6 +441,21 @@ They involve learning a policy but each action affects only the immediate
 reward.
 If action affect the next state as well as the reward then it is a full
 reinforcement learning problem.
+
+## Approximate Solution Methods
+
+In this post only tabular methods are discussed.
+Methods were the value function can be represented as matrices.
+But there is large area of approximate solution methods that scale up to large
+or continuous state spaces.
+These methods mainly include value-function approximation and policy gradient
+methods.
+
+Furthermore there is so called deep reinforcement learning which is branch of
+field using non-linear function approximators.
+Usually updating parameters with stochastic gradient descent.
+
+Material to get into these areas are in the references.
 
 ## References
 
