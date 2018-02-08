@@ -13,7 +13,7 @@ def policy_evaluation(policy, env, gamma=1.0, epsilon=1e-5):
     """
     # initialize state-value function arbitrarily
     V = numpy.zeros(env.observation_space.n)
-    # while unsufficient accuracy defined by treshold
+    # while unsufficient accuracy defined by threshold
     while True:
         delta = 0
         for s in range(env.observation_space.n):
@@ -55,7 +55,7 @@ def policy_improvement(env, V, gamma=1.0):
 def policy_iteration(env, gamma=1.0):
     """Policy iteration algorithm.
 
-    Retrun optimal policy and optimal state-value function for given MDP.
+    Return optimal policy and optimal state-value function for given MDP.
 
     env is a OpenAI gym environment transition dynamics as attribute P.
     gamma is a discount rate.
@@ -75,9 +75,9 @@ def policy_iteration(env, gamma=1.0):
 
 
 def value_iteration(env, gamma=1.0, epsilon=1e-5):
-    """Value iteration algrotihm
+    """Value iteration algorithm.
 
-    Retrun optimal policy and optimal state-value function for given MDP.
+    Return optimal policy and optimal state-value function for given MDP.
 
     env is a OpenAI gym environment transition dynamics as attribute P.
     gamma is a discount rate.
@@ -86,7 +86,7 @@ def value_iteration(env, gamma=1.0, epsilon=1e-5):
     V = numpy.zeros(env.observation_space.n)
     while True:
         v = numpy.copy(V)
-        # imporve value function
+        # improve value function
         V = numpy.max(env.R + (gamma * env.P @ V), axis=0)
         delta = numpy.max(numpy.abs(v - V))
         # check termination condition
