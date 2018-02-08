@@ -4,11 +4,21 @@ Category: reinforcement learning
 Tags: reinforcement learning
 
 In this post I would like to introduce reinforcement learning.
-Reinforcement learning is currently producing exciting results (see [OpenAI] and [DeepMind]) and in my opinion would lead to general artificial intelligence.
+Reinforcement learning is currently producing exciting results (see [OpenAI]
+and [DeepMind]) and in my opinion would lead to general artificial
+intelligence.
 
 [openai]: https://openai.com/ (OpenAI)
 [deepmind]: https://deepmind.com/ (DeepMind)
 [sutton2018]: http://incompleteideas.net/book/the-book-2nd.html (Sutton and Barto, Reinforcement Learning: An Introduction)
+
+I also prepared some algorithm implemented in Python in my
+[gym-rl GitHub repository][gym-rl] and I encourage you to also implement them
+while reading this post, [the book][sutton2018] and
+[UCL reinforcement learning course][ucl-course] by David Silver.
+
+[gym-rl]: https://github.com/podondra/gym-rl
+[ucl-course]: http://www0.cs.ucl.ac.uk/staff/d.silver/web/Teaching.html
 
 ## Introduction
 
@@ -454,6 +464,13 @@ methods.
 Furthermore there is so called deep reinforcement learning which is branch of
 field using non-linear function approximators.
 Usually updating parameters with stochastic gradient descent.
+Deep reinforcement learning has achieved remarkable successes as
+[playing Atari 2600 games][atari], [mastering Go][go] or
+[training an agent on many tasks][impala].
+
+[atari]: https://deepmind.com/research/dqn/
+[go]: https://deepmind.com/research/publications/mastering-game-go-without-human-knowledge/
+[impala]: https://deepmind.com/blog/impala-scalable-distributed-deeprl-dmlab-30/
 
 Material to get into these areas are in the references.
 
@@ -462,6 +479,7 @@ Material to get into these areas are in the references.
 - Richard S. Sutton and Andrew G. Barto, [Reinforcement Learning: An Introduction][sutton2018]
 - David Silver, [UCL Course on Reinforcement Learning][ucl-course]
 - John Schulman, [Deep Reinforcement Learning][schulman-course]
+- Denny Britz, [Learning Reinforcement Learning][britz-intro]
 
-[ucl-course]: http://www0.cs.ucl.ac.uk/staff/d.silver/web/Teaching.html
 [schulman-course]: https://www.youtube.com/watch?v=aUrX-rP_ss4
+[britz-intro]: http://www.wildml.com/2016/10/learning-reinforcement-learning/
