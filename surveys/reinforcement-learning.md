@@ -130,7 +130,7 @@ The agent's goal is to maximize *expected return*, the total amount of reward
 
 \\[G\_t \equiv \sum\_{k = t + 1}^T \gamma^{k - t - 1} R\_k,\\]
 
-where \\(\gamma \in [0, 1]\\) is an discount rate and \\(T\\) is time horizon
+where \\(\gamma \in (0, 1]\\) is an discount rate and \\(T\\) is time horizon
 which might be infinity but then \\(\gamma \neq 1\\) else the sum will not be
 finite.
 This is necessary due to distinction between continuing and episodic tasks.
@@ -148,6 +148,42 @@ intermediate accomplishments as the agent might learn to achieve these
 subgoals without learning to win the game.
 
 ### Policies and Value Functions
+
+Most of basic reinforcement learning algorithms involve a notion of value
+functions.
+They define the notion of how a state or a state and an action pair is good
+in terms of future rewards that can be expected.
+The value of a state is denoted \\(v\_{\pi}(s)\\), called *state-value
+function for policy \\(\pi\\)* and for MPDs is formally:
+
+\\[v\_{\pi}(s) \equiv \mathbb{E}\_{\pi}(G\_t | S\_t = s).\\]
+
+Similarly is defined the value of taking action in state which is called
+*action-value function for policy \\(\pi\\)*:
+
+\\[q\_{\pi}(s, a) \equiv \mathbb{E}\_{\pi}(G\_t | S\_t = s, A\_t = a).\\]
+
+A fundamental property of value functions is that they satisfy recursive
+relationships called *Bellman equations*.
+For example the Bellman equation of state-value function:
+
+\\[v\_{\pi}(s) \equiv \mathbb{E}\_{\pi}(R\_{t + 1} + \gamma
+v\_{\pi}(S\_{t + 1}) | S\_t = s).\\]
+
+Solving a reinforcement learning problem is roughly finding a policy that
+get a lot of long run reward.
+An *optimal policy* is a policy which has the *optimal state-value function*
+\\(v\_\*\\):
+
+\\[v\_\*(s) \equiv \max\_{\pi} v\_{\pi}(s).\\]
+
+The optimal policy also has the *optimal action-value function*:
+
+\\[q\_\*(s, a) \equiv \max\_{\pi} q\_{\pi}(s, a).\\]
+
+Having one of these functions makes determining optimal policy easy
+as always action that maximizes the future reward is selected.
+This policy is called *greedy* with respect to the optimal value function.
 
 ## Dynamic Programming
 
@@ -205,8 +241,8 @@ When implementing the algorithm a usual way would be to use two arrays,
 one for old values \\(v\_k(s)\\), one for new values \\(v\_{k + 1}(s)\\)
 and the new values would be computed base on the old values.
 But it is easier to implement it as in-place procedure with only one array
-which also converges to \\(v\_{\pi}\\)
-and usually converges faster because it has more recent data available sooner.
+which also converges to \\(v\_{\pi}\\) and usually converges faster because
+it has more recent data available sooner.
 
 ## Monte Carlo Methods
 
