@@ -10,10 +10,14 @@ There are algorithms for classic control, Atari games, Humanoid walking.
 
 ## Cross-entropy Method
 
-[CEM][tetris] is derivative-free optimization method.
+[CEM] is derivative-free optimization method.
+It is evolutionary algorithm that works embarrassingly well.
+The main idea of [CEM] is to maintain a distribution of possible solutions
+and update this distribution at each step.
+It can be applied to learn the weights of a function approximator
+drawing each weight from an independent Gaussian distribution.
 
-[entropy]: proceedings.mlr.press/v28/goschin13.pdf
-[tetris]: http://ie.technion.ac.il/CE/files/papers/Learning%20Tetris%20Using%20the%20Noisy%20Cross-Entropy%20Method.pdf
+[cem]: http://ie.technion.ac.il/CE/files/papers/Learning%20Tetris%20Using%20the%20Noisy%20Cross-Entropy%20Method.pdf
 
 ## Deep Q-network
 
@@ -76,7 +80,7 @@ hopping, and walking, as well as playing Atari games directly from raw images.
 
 ## Proximal Policy Optimization
 
-[PPO] methods have benefits of TRPO but are much simpler to implement and
+[PPO] methods have benefits of [TRPO] but are much simpler to implement and
 have better sample complexity.
 [PPO] propose a objective with clipped probability ratios which forms a
 pessimistic estimate of the performance of a policy.
