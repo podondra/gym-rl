@@ -1,4 +1,5 @@
 refs/
+.pytest_cache/
 
 # Backup files of aspell
 *.bak
