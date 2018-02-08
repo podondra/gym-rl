@@ -199,27 +199,23 @@ but more effectively and without full knowledge of the environment.
 The main idea of dynamic programming is to use value functions to structure
 the search for good policies via Bellman optimality equations:
 
-\\[
-v\_\*(s) = \max\_a \sum\_{s', r} p(s', r | s, a)
-\big[r + \gamma v\_\*(s')\big]
-\\]
+\\[v\_\*(s) = \max\_a \sum\_{s', r} p(s', r | s, a) \big[r + \gamma
+v\_\*(s')\big]\\]
 
 or
 
-\\[
-q\_\*(s, a) = \sum\_{s', r} p(s', r | s, a)
-\big[r + \gamma \max\_{a'} q\_\*(s', a')\big],
-\\]
+\\[q\_\*(s, a) = \sum\_{s', r} p(s', r | s, a) \big[r + \gamma \max\_{a'}
+q\_\*(s', a')\big],\\]
 
-for all \\(s \in \mathcal{S}\\), \\(a \in \mathcal{A}(s)\\)
-and \\(s' \in \mathcal{S^+}\\).
+for all \\(s, s' \in \mathcal{S}\\) and \\(a \in \mathcal{A}(s)\\).
 Dynamic programming makes these equations into iterative update rules
 for improving approximations of the desired value functions.
 
 ### Policy Evaluation
 
-Consider how to compute state-value function \\(v\_{\pi}\\) for a given policy
-\\(\pi\\). This is referred as *policy evaluation* or *prediction problem*.
+Consider how to compute state-value function \\(v\_{\pi}\\) for a given
+policy \\(\pi\\).
+This is referred as *policy evaluation* or *prediction problem*.
 
 Having a sequence of approximate value function \\(v\_0, v\_1, v\_2, \dots\\)
 each mapping \\(\mathcal{S^+} \to \mathbb{R}\\).
@@ -228,13 +224,12 @@ Only the terminal state must have value \\(0\\).
 Then each next approximation is obtained by using the Bellman equation
 for \\(v\_{\pi}\\) as an update rule:
 
-\\[
-v\_{k + 1}(s) = \max\_a \sum\_{s', r} p(s', r | s, a)
-\big[r + \gamma v\_{k}(s')\big],
-\\]
+\\[v\_{k + 1}(s) = \max\_a \sum\_{s', r} p(s', r | s, a) \big[r + \gamma
+v\_{k}(s')\big],\\]
 
-for all \\(s \in \mathcal{S}\\). In general the sequence
-\\(\\{v\_k\\}\_{k = 0}^{\infty}\\) can be shown to converge to \\(v\_{\pi}\\).
+for all \\(s \in \mathcal{S}\\).
+In general the sequence \\(\\{v\_k\\}\_{k = 0}^{\infty}\\) can be shown to
+converge to \\(v\_{\pi}\\).
 This algorithm is called *iterative policy evaluation*.
 
 When implementing the algorithm a usual way would be to use two arrays,
@@ -244,13 +239,45 @@ But it is easier to implement it as in-place procedure with only one array
 which also converges to \\(v\_{\pi}\\) and usually converges faster because
 it has more recent data available sooner.
 
+### Policy Improvement
+
+TODO policy improvement.
+
+### Policy Iteration
+
+TODO policy iteration.
+
+### Value Iteration
+
+TODO value iteration.
+
 ## Monte Carlo Methods
 
 TODO Monte Carlo methods.
 
+### First-visit Monte Carlo Prediction
+
+TODO first-visit Monte Carlo prediction.
+
+### On-policy First-visit Monte Carlo Control
+
+TODO on-policy first-visit Monte Carlo control.
+
+### Off-policy Prediction via Importance Sampling
+
+TODO off-policy prediction via importance sampling.
+
 ## Temporal-Difference Learning
 
 TODO temporal-difference learning.
+
+### Sarsa
+
+TODO Sarsa.
+
+### Q-learning
+
+TODO Q-learning.
 
 ## Exploration and Exploitation
 
@@ -310,7 +337,7 @@ The true value of an action it the mean reward
 so natural way to estimate is by averaging received rewards:
 
 \\[Q\_t(a) \equiv \frac{\sum^{t - 1}\_{i = 1} R\_i \cdot 1\_{A\_i = a}}
-{\sum^{t - 1}_{i = 1} 1\_{A\_i = a}},\\]
+{\sum^{t - 1}\_{i = 1} 1\_{A\_i = a}},\\]
 
 where \\(\mathbb{1}\_{\text{condition}}\\) is random variable indicator
 that is \\(1\\) if condition is true else \\(0\\).
@@ -323,7 +350,7 @@ This way of estimating action values is called *sample-average*.
 The simplest action selection rule based on sample-average is to select the
 action with highest estimated value (greedy action):
 
-\\[A\_t \equiv \operatorname{argmax}_a Q_t(a).\\]
+\\[A\_t \equiv \operatorname{argmax}\_a Q\_t(a).\\]
 
 
 Greedy action selection always exploit current knowledge to maximize immediate
