@@ -8,39 +8,21 @@ It also uses OpenAI [gym-gridworlds] environments that I implemented myself.
 
 [gym-gridworlds]: https://github.com/podondra/gym-gridworlds
 
-## Setup
-
-	$ git clone https://github.com/podondra/gym-rl
-	$ git submodule init
-	$ git submodule update
-
-## Checklist
-
-- [ ] write an introductory blog post about reinforcement learning
-      with Python examples and publish it on https://podondra.cz
-- [x] make a survey of reinforcement learning algorithms
-      which are applicable to gym's problems
-- [ ] implement some algorithms from survey and apply them to gym environments
-    - [ ] some [Atari 2600][atari] environments
-    - [ ] *HumanoidFlagrun* from [Roboschool]
-    - [ ] *Kick and Defend* [competitive self-play environment][self-play]
-- [x] use Python 3.4 or higher
-- [ ] use [pytest] to make sure algorithm are correctly implemented
-- [x] for implementation use [NumPy], (and [pandas])
-
-[roboschool]: https://blog.openai.com/roboschool/ (Roboschool OpenAI Blog)
-[self-play]: https://github.com/openai/multiagent-competition
-             (Competitive Multi-Agent Environments)
-[pytest]: https://docs.pytest.org/en/latest/ (pytest Documentation)
-[numpy]: http://www.numpy.org/ (NumPy Documentation)
-[pandas]: https://pandas.pydata.org/ (Python Data Analysis Library)
-[atari]: https://en.wikipedia.org/wiki/Atari_2600 (Atari 2600 Wikipedia)
-
 ## Blog Post
 
 The blog post will be available on [podondra site][site].
 
 [site]: https://podondra.cz
+
+## Setup
+
+	$ git clone https://github.com/podondra/gym-rl	# clone this repository
+	$ git submodule init
+	$ git submodule update	# download also gym-gridworld for browsing
+	$ python3.6 -m venv venv	# create virtual environment
+	$ source venv/bin/activate	# active virtual environment
+	$ pip install -U pip setuptools wheel	# update some packages
+	$ pip install -r requirements.txt	# install dependencies
 
 ## Algorithms for OpenAI gym
 
