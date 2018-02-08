@@ -1,12 +1,10 @@
 # Reinforcement Learning in gym
 
-This work aims to use reinforcement learning to solve some [gym]
-environments.
+This work aims to use reinforcement learning to solve some [gym] environments.
 
 [gym]: https://github.com/openai/gym (gym GitHub repository)
 
-It also uses OpenAI [gym-gridworlds] environments
-that implemented myself.
+It also uses OpenAI [gym-gridworlds] environments that I implemented myself.
 
 [gym-gridworlds]: https://github.com/podondra/gym-gridworlds
 
