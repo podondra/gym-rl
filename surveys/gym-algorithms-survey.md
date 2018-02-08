@@ -1,4 +1,4 @@
-# Survey of Algorithm for OpenAI gym Problems
+# Algorithms for OpenAI gym
 
 In this survey I list and give brief summary of algorithm applicable to
 [OpenAI gym][gym] environments.
@@ -75,5 +75,12 @@ hopping, and walking, as well as playing Atari games directly from raw images.
 [trpo]: https://arxiv.org/abs/1502.05477
 
 ## Proximal Policy Optimization
+
+[PPO] methods have benefits of TRPO but are much simpler to implement and
+have better sample complexity.
+[PPO] propose a objective with clipped probability ratios which forms a
+pessimistic estimate of the performance of a policy.
+To optimize a policy it alternates between sampling data for the policy
+and performing several epochs of optimization on the sampled data.
 
 [ppo]: https://arxiv.org/abs/1707.06347
