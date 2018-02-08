@@ -20,15 +20,15 @@ that implemented myself.
 
 - [ ] write an introductory blog post about reinforcement learning
       with Python examples and publish it on https://podondra.cz
-- [ ] make a survey of reinforcement learning algorithms
+- [x] make a survey of reinforcement learning algorithms
       which are applicable to gym's problems
 - [ ] implement some algorithms from survey and apply them to gym environments
     - [ ] some [Atari 2600][atari] environments
     - [ ] *HumanoidFlagrun* from [Roboschool]
     - [ ] *Kick and Defend* [competitive self-play environment][self-play]
-- [ ] use Python 3.4 or higher
+- [x] use Python 3.4 or higher
 - [ ] use [pytest] to make sure algorithm are correctly implemented
-- [ ] for implementation use [NumPy] and [pandas]
+- [x] for implementation use [NumPy], (and [pandas])
 
 [roboschool]: https://blog.openai.com/roboschool/ (Roboschool OpenAI Blog)
 [self-play]: https://github.com/openai/multiagent-competition
