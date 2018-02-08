@@ -44,6 +44,13 @@ The blog post will be available on [podondra site][site].
 
 [site]: https://podondra.cz
 
+## Algorithms for OpenAI gym
+
+This [survey] list algorithms which can be applied to OpenAI gym environment
+such as Atari 2600 game, HumanoidFlagrun or Kick and Defend.
+
+[survey]: surveys/gym-algorithms-survey.md
+
 ## References
 
 - [Reinforcement Learning: An Introduction](http://incompleteideas.net/book/the-book-2nd.html)
