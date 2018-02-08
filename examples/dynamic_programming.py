@@ -55,7 +55,7 @@ def policy_improvement(env, V, gamma=1.0):
 def policy_iteration(env, gamma=1.0):
     """Policy iteration algorithm.
 
-    Retruns optimal policy and optimal state-value function for given MDP.
+    Retrun optimal policy and optimal state-value function for given MDP.
 
     env is a OpenAI gym environment transition dynamics as attribute P.
     gamma is a discount rate.
@@ -72,3 +72,25 @@ def policy_iteration(env, gamma=1.0):
         if (policy == policy_prime).all():
             return policy, V
         policy = policy_prime
+
+
+def value_iteration(env, gamma=1.0, epsilon=1e-5):
+    """Value iteration algrotihm
+
+    Retrun optimal policy and optimal state-value function for given MDP.
+
+    env is a OpenAI gym environment transition dynamics as attribute P.
+    gamma is a discount rate.
+    """
+    # arbitrary initialization
+    V = numpy.zeros(env.observation_space.n)
+    while True:
+        v = numpy.copy(V)
+        # imporve value function
+        V = numpy.max(env.R + (gamma * env.P @ V), axis=0)
+        delta = numpy.max(numpy.abs(v - V))
+        # check termination condition
+        if delta < epsilon:
+            break
+    # compute policy and return
+    return policy_improvement(env, V, gamma), V

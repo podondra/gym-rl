@@ -47,3 +47,8 @@ def test_policy_improvement(gridworld, true_state_values):
 def test_policy_iteration(gridworld, optimal_state_values):
     policy, V = dynamic_programming.policy_iteration(gridworld)
     assert numpy.allclose(V, optimal_state_values)
+
+
+def test_value_iteration(gridworld, optimal_state_values):
+    policy, V = dynamic_programming.value_iteration(gridworld)
+    assert numpy.allclose(V, optimal_state_values)
