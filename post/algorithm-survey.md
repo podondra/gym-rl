@@ -51,9 +51,17 @@ more frequently and therefore learn more efficiently.
 
 [prioritized]: https://arxiv.org/abs/1511.05952
 
-## Asynchronous Methods
+## Asynchronous Advantage Actor-critic
 
-[a2c]: https://arxiv.org/abs/1602.01783
+[A3C] is method for deep reinforcement learning that uses asynchronous
+gradient descent for optimization of deep neural networks.
+Instead of experience replay [A3C] asynchronously executes multiple agents in
+parallel on multiple instances of an environment.
+This parallelism speeds up training and decorrelates the data.
+Therefore it can be applied to robustly and efficiently to train a deep neural
+network.
+
+[a3c]: https://arxiv.org/abs/1602.01783
 
 ## Trust Region Policy Optimization
 
