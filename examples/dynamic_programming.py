@@ -50,3 +50,25 @@ def policy_improvement(env, V, gamma=1.0):
         # set probability 1 for that action
         policy[s, a] = 1.0
     return policy
+
+
+def policy_iteration(env, gamma=1.0):
+    """Policy iteration algorithm.
+
+    Retruns optimal policy and optimal state-value function for given MDP.
+
+    env is a OpenAI gym environment transition dynamics as attribute P.
+    gamma is a discount rate.
+    """
+    # start with uniform random policy
+    policy = numpy.ones((env.observation_space.n, env.action_space.n))
+    policy /= env.action_space.n
+    while True:
+        # evaluate policy
+        V = policy_evaluation(policy, env, gamma)
+        # greedily improve policy
+        policy_prime = policy_improvement(env, V, gamma)
+        # check if optimal
+        if (policy == policy_prime).all():
+            return policy, V
+        policy = policy_prime

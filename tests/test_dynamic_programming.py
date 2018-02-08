@@ -18,6 +18,13 @@ def true_state_values():
             )
 
 
+@pytest.fixture
+def optimal_state_values():
+    return numpy.array(
+            [0, -1, -2, -3, -1, -2, -3, -2, -2, -3, -2, -1, -3, -2, -1]
+            )
+
+
 def test_policy_evaluation(gridworld, true_state_values):
     # define transition for stochastic policy
     stochastic = numpy.ones(
@@ -35,3 +42,8 @@ def test_policy_improvement(gridworld, true_state_values):
             )
     # make sure that probabilities sum up to 1
     assert numpy.all(policy.sum(axis=1) == 1)
+
+
+def test_policy_iteration(gridworld, optimal_state_values):
+    policy, V = dynamic_programming.policy_iteration(gridworld)
+    assert numpy.allclose(V, optimal_state_values)

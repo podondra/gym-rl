@@ -12,8 +12,9 @@ intelligence.
 [deepmind]: https://deepmind.com/ (DeepMind)
 [sutton2018]: http://incompleteideas.net/book/the-book-2nd.html (Sutton and Barto, Reinforcement Learning: An Introduction)
 
-I also prepared some algorithm implemented in Python in my
-[gym-rl GitHub repository][gym-rl] and I encourage you to also implement them
+I also implemented some algorithms in Python
+Please see my [gym-rl GitHub repository][gym-rl].
+I encourage you to also implement them
 while reading this post, [the book][sutton2018] and
 [UCL reinforcement learning course][ucl-course] by David Silver.
 
@@ -44,7 +45,7 @@ angles).
 Takes actions (joint torques) that affect the state.
 Gets rewards (for staying balanced, navigate to target location and so on).
 
-Reinforcement learning has many faces.
+Moreover reinforcement learning is very fascinating field as it has many faces.
 It is in intersection of:
 
 - computer science (machine learning),
@@ -56,18 +57,17 @@ It is in intersection of:
 
 ### Basic Concepts
 
-A policy, a reward, a value function and a model of an environment are four
-main subelements of a reinforcement learning.
+Policy, reward, value function and model of an environment are four main
+elements of a reinforcement learning.
 
-A *policy* is a mapping from perceived stated to actions.
+A *policy* is a mapping from perceived states to actions.
 Agent's behavior function.
-Maps state to action.
 Can be defined as deterministic policy \\(a = \pi(s)\\)
 or stochastic policy \\(\mathbb{P}(A\_t = a | S\_t = s) = \pi(a | s)\\).
 
 
 A *reward* \\(R\_t\\) defines the goal in a reinforcement learning problem.
-It is a scalar feedback signal send to the agent by the environment at every
+It is a scalar feedback signal sent to an agent by an environment at every
 time step \\(t\\).
 The agent's objective is to maximize the total reward over the long run.
 Reinforcement learning is based on the *reward hypothesis*:
@@ -78,10 +78,10 @@ On contrary to reward *value function* specifies what is good in the long run.
 It is used to evaluate goodness of states.
 What an agent can expect to accumulate from a state over the future.
 
-The last element is a *model of environment*.
-It mimics the behavior of the environment or allows inferences about its
-behavior.
-They are used for estimating future situations before they are actually
+The last element is *a model of an environment*.
+It mimics the behavior of an environment or allows inferences about its
+dynamics.
+It is used for estimating future situations before they are actually
 experienced.
 
 ### Approaches to Reinforcement Learning
@@ -89,7 +89,6 @@ experienced.
 There are different approaches to reinforcement learning.
 The two different strategies are to either optimize policy or work with value
 functions.
-
 Policy optimization includes evolutionary methods and policy gradients.
 Value function methods includes dynamic programming, Monte Carlo methods,
 temporal-difference learning and function approximation.
@@ -97,21 +96,21 @@ It their intersection are actor-critic methods.
 
 ## Markov Decision Processes
 
-Markov decision processes formally describe an environment for reinforcement
+Markov decision processes formally describe environments for reinforcement
 learning.
 They are mathematically idealized from of reinforcement learning problems.
 Key elements are returns, value functions and Bellman equations.
 
-In MDP the learner is an *agent* interacting with an *environment*.
+In an MDP a learner is an *agent* interacting with an *environment*.
 Agent and environment interact at discrete time steps \\(t = 0, 1, 2, \dots\\).
 The agent selects and action \\(A\_t \in \mathcal{A(s)}\\) and the environment
-responses with reward \\(R\_{t + 1} \in \mathbb{R}\\) and next state
+responses with a reward \\(R\_{t + 1} \in \mathbb{R}\\) and a next state
 \\(S\_{t + 1} \in \mathcal{S}\\) and so forth.
-This loop in MDP can be unrolled into a *trajectory*:
+This loop can be unrolled into a *trajectory*:
 
 \\[S\_0, A\_0, R\_1, S\_1, A\_1, R\_2, S\_2, A\_2, R\_3, \dots\\] 
 
-That gives a probability of occurrence for \\(s' \in \mathcal{S}\\) and
+MDP defines a probability of occurrence for \\(s' \in \mathcal{S}\\) and
 \\(r \in \mathcal{R}\\) at time \\(t\\) given preceding state and action:
 
 \\[p(s', r | s, a) \equiv \mathbb{P}(S\_t = s', R\_t = r | S\_{t - 1} = s,
@@ -122,8 +121,8 @@ and \\(a \in \mathcal{A}(s)\\).
 The function
 \\(p: \mathcal{S} \times \mathbb{R} \times \mathcal{S} \times \mathcal{A} \to [0, 1]\\)
 is ordinary deterministic function of four arguments.
-The probabilities give by the function \\(p\\) completely characterize the
-dynamics of a finite MDP.
+The probabilities given by the function \\(p\\) completely characterize the
+dynamics of an MDP.
 
 The agent's goal is to maximize *expected return*, the total amount of reward
 \\(R\_t\\):
@@ -151,7 +150,7 @@ subgoals without learning to win the game.
 
 Most of basic reinforcement learning algorithms involve a notion of value
 functions.
-They define the notion of how a state or a state and an action pair is good
+They define the notion of how a state or a pair of state and action is good
 in terms of future rewards that can be expected.
 The value of a state is denoted \\(v\_{\pi}(s)\\), called *state-value
 function for policy \\(\pi\\)* and for MPDs is formally:
@@ -188,16 +187,14 @@ This policy is called *greedy* with respect to the optimal value function.
 ## Dynamic Programming
 
 Dynamic programming refers to collection of algorithms used for computing
-optimal policies
-when a perfect model of the environment is given as a MDP.
-These algorithms are limited by their assumptions that the MDP is fully known
-and because they are very computationally demanding.
-But their are very important as other algorithm might be viewed
+optimal policies when a perfect model of the environment is given as an MDP.
+These algorithms are limited by their assumptions that the MDP is fully known.
+Their are very important as other algorithm might be viewed
 as attempting the same effect as dynamic programming
 but more effectively and without full knowledge of the environment.
 
 The main idea of dynamic programming is to use value functions to structure
-the search for good policies via Bellman optimality equations:
+the search for good policies via *Bellman optimality equations*:
 
 \\[v\_\*(s) = \max\_a \sum\_{s', r} p(s', r | s, a) \big[r + \gamma
 v\_\*(s')\big]\\]
@@ -213,14 +210,12 @@ for improving approximations of the desired value functions.
 
 ### Policy Evaluation
 
-Consider how to compute state-value function \\(v\_{\pi}\\) for a given
-policy \\(\pi\\).
-This is referred as *policy evaluation* or *prediction problem*.
-
+Consider how to compute state-value function \\(v\_{\pi}\\) for a given policy
+\\(\pi\\).
 Having a sequence of approximate value function \\(v\_0, v\_1, v\_2, \dots\\)
-each mapping \\(\mathcal{S^+} \to \mathbb{R}\\).
+each mapping \\(\mathcal{S} \to \mathbb{R}\\).
 The first approximation \\(v\_0\\) is chosen arbitrarily.
-Only the terminal state must have value \\(0\\).
+Only the terminal state must have value 0.
 Then each next approximation is obtained by using the Bellman equation
 for \\(v\_{\pi}\\) as an update rule:
 
@@ -230,7 +225,36 @@ v\_{k}(s')\big],\\]
 for all \\(s \in \mathcal{S}\\).
 In general the sequence \\(\\{v\_k\\}\_{k = 0}^{\infty}\\) can be shown to
 converge to \\(v\_{\pi}\\).
-This algorithm is called *iterative policy evaluation*.
+This algorithm is called *iterative policy evaluation*:
+
+```python
+def policy_evaluation(policy, env, gamma=1.0, epsilon=1e-5):
+    """Policy evaluation algorithm.
+
+    Compute state-value function of given policy.
+
+    policy is the policy to by evaluated in form of transition matrix.
+    env is a OpenAI gym environment transition dynamics as attribute P.
+    gamma is a discount rate.
+    epsilon is a threshold determining accuracy of estimation.
+    """
+    # initialize state-value function arbitrarily
+    V = numpy.zeros(env.observation_space.n)
+    # while unsufficient accuracy defined by treshold
+    while True:
+        delta = 0
+        for s in range(env.observation_space.n):
+            # apply update given by Bellman equation
+            v = V[s]
+            acc = 0
+            for a in range(env.action_space.n):
+                acc += policy[s, a] * (env.P[a, s] @ (env.R[a, s] + gamma * V))
+            V[s] = acc
+            # store biggest inaccuracy
+            delta = max(delta, numpy.abs(v - V[s]))
+        if delta < epsilon:
+            return V
+```
 
 When implementing the algorithm a usual way would be to use two arrays,
 one for old values \\(v\_k(s)\\), one for new values \\(v\_{k + 1}(s)\\)
@@ -241,11 +265,73 @@ it has more recent data available sooner.
 
 ### Policy Improvement
 
-TODO policy improvement.
+The state-value function computed by the policy evaluation algorithm can be
+used to find better policies.
+New better *greedy* policy is determinde by
+
+\\[\pi'(s) \equiv \operatorname{argmax}\_a q\_\pi(s, a) =
+\operatorname{argmax}\_a \mathbb{E}(R\_{t + 1} + \gamma v\_\pi(S\_{t + 1}) |
+S\_t = s, A\_t = a).\\]
+
+The greedy policy takes action that looks best after one step of lookahead.
+By constructing the new policy in this way it will be always better or as
+good as the old policy.
+This algorithm is known as *policy improvement*:
+
+```python
+def policy_improvement(env, V, gamma=1.0):
+    """Policy improvement algorithm.
+
+    Return transition matrix of policy given by state-value function V.
+
+    env is a OpenAI gym environment transition dynamics as attribute P.
+    V is numpy array of state-values.
+    gamma is a discount rate.
+    """
+    # construct empty transition matrix
+    policy = numpy.zeros((env.observation_space.n, env.action_space.n))
+    for s in range(env.observation_space.n):
+        # for each state construct state-action value
+        action_values = numpy.zeros(env.action_space.n)
+        for a in range(env.action_space.n):
+            action_values[a] = env.P[a, s] @ (env.R[a, s] + gamma * V)
+        # choose the best action
+        a = numpy.argmax(action_values)
+        # set probability 1 for that action
+        policy[s, a] = 1.0
+    return policy
+```
 
 ### Policy Iteration
 
-TODO policy iteration.
+Previous sections show how to improve a policy a how to compute it value
+function.
+This process can be repeated. Each policy is guearanteed to be strict
+improvement unless it is already optimal.
+This algorithm is called *policy iteration*:
+
+```python
+def policy_iteration(env, gamma=1.0):
+    """Policy iteration algorithm.
+
+    Retruns optimal policy and optimal state-value function for given MDP.
+
+    env is a OpenAI gym environment transition dynamics as attribute P.
+    gamma is a discount rate.
+    """
+    # start with uniform random policy
+    policy = numpy.ones((env.observation_space.n, env.action_space.n))
+    policy /= env.action_space.n
+    while True:
+        # evaluate policy
+        V = policy_evaluation(policy, env, gamma)
+        # greedily improve policy
+        policy_prime = policy_improvement(env, V, gamma)
+        # check if optimal
+        if (policy == policy_prime).all():
+            return policy, V
+        policy = policy_prime
+```
 
 ### Value Iteration
 
@@ -397,7 +483,7 @@ Q\_{n + 1} &= \frac{1}{n} \sum^n\_{i = 1} R\_i \\\\
 Code for complete bandit algorithm with incrementally computed sample averages
 and \\(\varepsilon\\)-greedy action selection:
 
-```python3
+```python
 # estimates of action values
 Q = numpy.zeros(k)
 # numbers of action's selections
