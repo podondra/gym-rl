@@ -240,7 +240,7 @@ def policy_evaluation(policy, env, gamma=1.0, epsilon=1e-5):
     """
     # initialize state-value function arbitrarily
     V = numpy.zeros(env.observation_space.n)
-    # while unsufficient accuracy defined by treshold
+    # while insufficient accuracy defined by threshold
     while True:
         delta = 0
         for s in range(env.observation_space.n):
@@ -267,13 +267,13 @@ it has more recent data available sooner.
 
 The state-value function computed by the policy evaluation algorithm can be
 used to find better policies.
-New better *greedy* policy is determinde by
+New better *greedy* policy is determined by
 
 \\[\pi'(s) \equiv \operatorname{argmax}\_a q\_\pi(s, a) =
 \operatorname{argmax}\_a \mathbb{E}(R\_{t + 1} + \gamma v\_\pi(S\_{t + 1}) |
 S\_t = s, A\_t = a).\\]
 
-The greedy policy takes action that looks best after one step of lookahead.
+The greedy policy takes action that looks best after one step of look ahead.
 By constructing the new policy in this way it will be always better or as
 good as the old policy.
 This algorithm is known as *policy improvement*:
@@ -306,7 +306,7 @@ def policy_improvement(env, V, gamma=1.0):
 
 Previous sections show how to improve a policy a how to compute it value
 function.
-This process can be repeated. Each policy is guearanteed to be strict
+This process can be repeated. Each policy is guaranteed to be strict
 improvement unless it is already optimal.
 This algorithm is called *policy iteration*:
 
@@ -314,7 +314,7 @@ This algorithm is called *policy iteration*:
 def policy_iteration(env, gamma=1.0):
     """Policy iteration algorithm.
 
-    Retruns optimal policy and optimal state-value function for given MDP.
+    Return optimal policy and optimal state-value function for given MDP.
 
     env is a OpenAI gym environment transition dynamics as attribute P.
     gamma is a discount rate.
@@ -336,15 +336,15 @@ def policy_iteration(env, gamma=1.0):
 ### Value Iteration
 
 Last method in scope of dynamic programming is value iteration which address
-draback of policy iteration that has to carried out all iterations of policy
+drawback of policy iteration that has to carried out all iterations of policy
 evaluation.
 It uses policy evaluation which stops after one sweep:
 
 ```python
 def value_iteration(env, gamma=1.0, epsilon=1e-5):
-    """Value iteration algrotihm
+    """Value iteration algorithm
 
-    Retrun optimal policy and optimal state-value function for given MDP.
+    Return optimal policy and optimal state-value function for given MDP.
 
     env is a OpenAI gym environment transition dynamics as attribute P.
     gamma is a discount rate.
@@ -353,7 +353,7 @@ def value_iteration(env, gamma=1.0, epsilon=1e-5):
     V = numpy.zeros(env.observation_space.n)
     while True:
         v = numpy.copy(V)
-        # imporve value function
+        # improve value function
         V = numpy.max(env.R + (gamma * env.P @ V), axis=0)
         delta = numpy.max(numpy.abs(v - V))
         # check termination condition
@@ -365,19 +365,20 @@ def value_iteration(env, gamma=1.0, epsilon=1e-5):
 
 ## Monte Carlo Methods
 
-TODO Monte Carlo methods.
+Monte Carlo methods learn value function from experience from sample
+episodes.
+Thus there is no need for full knowledge of an environment as in dynamic
+programming.
+Monte Carlo methods are based on sampling episodes and at the end of each
+episode they make update to value function according to estimate from
+that estimate.
+In this is one drawback of these methods that they are high variance
+due to lot of randomness within an episode but they are not biased.
 
-### First-visit Monte Carlo Prediction
-
-TODO first-visit Monte Carlo prediction.
-
-### On-policy First-visit Monte Carlo Control
-
-TODO on-policy first-visit Monte Carlo control.
-
-### Off-policy Prediction via Importance Sampling
-
-TODO off-policy prediction via importance sampling.
+There are Monte Carlo algorithms for policy evaluation and control.
+But I would not go into details of that still the code is available in
+the [gym-rl] repository and let's move on to temporal-difference learning
+from which there is only small step towards more complicated methods.
 
 ## Temporal-Difference Learning
 
@@ -390,6 +391,28 @@ TODO Sarsa.
 ### Q-learning
 
 TODO Q-learning.
+
+## Approximate Solution Methods
+
+In this post only tabular methods are discussed.
+Methods were the value function can be represented as matrices.
+But there is large area of approximate solution methods that scale up to large
+or continuous state spaces.
+These methods mainly include value-function approximation and policy gradient
+methods.
+
+Furthermore there is so called deep reinforcement learning which is branch of
+field using non-linear function approximators.
+Usually updating parameters with stochastic gradient descent.
+Deep reinforcement learning has achieved remarkable successes as
+[playing Atari 2600 games][atari], [mastering Go][go] or
+[training an agent on many tasks][impala].
+
+[atari]: https://deepmind.com/research/dqn/
+[go]: https://deepmind.com/research/publications/mastering-game-go-without-human-knowledge/
+[impala]: https://deepmind.com/blog/impala-scalable-distributed-deeprl-dmlab-30/
+
+Material to get into these areas are in the references.
 
 ## Exploration and Exploitation
 
@@ -626,28 +649,6 @@ They involve learning a policy but each action affects only the immediate
 reward.
 If action affect the next state as well as the reward then it is a full
 reinforcement learning problem.
-
-## Approximate Solution Methods
-
-In this post only tabular methods are discussed.
-Methods were the value function can be represented as matrices.
-But there is large area of approximate solution methods that scale up to large
-or continuous state spaces.
-These methods mainly include value-function approximation and policy gradient
-methods.
-
-Furthermore there is so called deep reinforcement learning which is branch of
-field using non-linear function approximators.
-Usually updating parameters with stochastic gradient descent.
-Deep reinforcement learning has achieved remarkable successes as
-[playing Atari 2600 games][atari], [mastering Go][go] or
-[training an agent on many tasks][impala].
-
-[atari]: https://deepmind.com/research/dqn/
-[go]: https://deepmind.com/research/publications/mastering-game-go-without-human-knowledge/
-[impala]: https://deepmind.com/blog/impala-scalable-distributed-deeprl-dmlab-30/
-
-Material to get into these areas are in the references.
 
 ## References
 
