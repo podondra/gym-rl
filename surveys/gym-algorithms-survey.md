@@ -1,7 +1,4 @@
-Title: Survey of Algorithm for OpenAI gym Problems
-Date: 2018-02-07
-Category: reinforcement learning
-Tags: reinforcement learning, gym
+# Survey of Algorithm for OpenAI gym Problems
 
 In this survey I list and give brief summary of algorithm applicable to
 [OpenAI gym][gym] environments.
@@ -12,6 +9,8 @@ There are algorithms for classic control, Atari games, Humanoid walking.
 [gym]: https://github.com/openai/gym
 
 ## Cross-entropy Method
+
+[CEM][tetris] is derivative-free optimization method.
 
 [entropy]: proceedings.mlr.press/v28/goschin13.pdf
 [tetris]: http://ie.technion.ac.il/CE/files/papers/Learning%20Tetris%20Using%20the%20Noisy%20Cross-Entropy%20Method.pdf
@@ -64,6 +63,14 @@ network.
 [a3c]: https://arxiv.org/abs/1602.01783
 
 ## Trust Region Policy Optimization
+
+[TRPO] is an iterative procedure for optimizing policies with guaranteed
+monotonic improvement.
+It is effective for optimizing neural networks by minimizing a surrogate
+objective function that guarantees policy improvement with non-trivial step
+sizes.
+Its [paper][trpo] shows that it can learn complex policies for swimming,
+hopping, and walking, as well as playing Atari games directly from raw images.
 
 [trpo]: https://arxiv.org/abs/1502.05477
 
