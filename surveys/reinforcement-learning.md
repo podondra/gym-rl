@@ -401,10 +401,10 @@ TD-error.
 Sarsa is *on-policy* temporal-difference control.
 It learn action-value function \\(q\_\pi(s, a)\\) for current behavior policy
 \\(\pi\\).
-Therefore i rather uses this equation:
+Therefore is rather uses this equation:
 
-\\[Q(S\_t, A\_t) \gets Q(S\_t, A\_t) + \alpha (R\_{t + 1} + Q(S\_{t + 1},
-A\_{t + 1}) - Q(S\_t), A\_t).\\]
+\\[Q(S\_t, A\_t) \gets Q(S\_t, A\_t) + \alpha (R\_{t + 1} + \gamma
+Q(S\_{t + 1}, A\_{t + 1}) - Q(S\_t, A\_t)).\\]
 
 This update is done after every transition and it uses tuple
 \\(S\_t, A\_t, R\_{t + 1}, S\_{t + 1}, A\_{t + 1}\\) which gives it its name
@@ -447,7 +447,48 @@ This is needed to assure exploration of whole state space.
 
 ### Q-learning
 
-TODO Q-learning.
+On the other hand Q-learning is *off-policy* temporal-difference control
+algorithm defined by:
+
+\\[Q(S\_t, A\_t) \gets Q(S\_t, A\_t) + \alpha (R\_{t + 1} + \gamma \max\_a
+Q(S\_{t + 1}, a) - Q(S\_t, A\_t)).\\]
+
+Therefore the learned action-value function \\(Q\\) directly approximates
+\\(q\_\*\\) independent of policy that is followed.
+The policy that is followed only has to explore the whole space.
+This has been proved to converge by Watkins in 1989.
+
+Q-learning algorithm is very similar to Sarsa:
+
+```python
+def q_learning(env, n_episodes, gamma=1.0, alpha=0.5, epsilon=0.1):
+    """Q-learning algorithm.
+
+    Return optimal action value function Q. It is off-policy
+    temporal-difference method.
+
+    env is an OpenAI gym environment.
+    n_episodes is number of episodes to run.
+    gamma is an discount factor.
+    alpha is an learning rate.
+    epsilon is probability of selecting random action.
+    """
+    # rather than store Q as table use dictionary (default value is 0)
+    Q = defaultdict(float)
+    for _ in range(n_episodes):
+        S = env.reset()
+        while True:
+            # select epsilon-greedy action
+            A = epsilon_greedy_policy(env, S, Q, epsilon)
+            S_prime, R, done, _ = env.step(A)
+            # Q update
+            max_Q = numpy.max([Q[S_prime, A] for A in range(env.action_space.n)])
+            Q[S, A] += alpha * (R + gamma * max_Q - Q[S, A])
+            S = S_prime
+            if done:
+                break
+    return Q
+```
 
 ## Approximate Solution Methods
 
@@ -473,14 +514,17 @@ Material to get into these areas are in the references.
 
 ## Exploration and Exploitation
 
-Reinforcement learning uses training information
-which *evaluates* the actions taken
-rather than *instructs* by giving correct actions.
-Therefore the search for good behavior is needed.
-Purely evaluative feedback indicates how good the action taken was
-so depends entirely on the action.
-Purely instructive feedback indicates the correct action independently of
-action actually taken.
+Actions whose estimated value is greatest are called *greedy* actions.
+Selecting one of these actions is *exploiting* current knowledge of the
+values of the actions.
+If a non-greedy action is selected than an agent is *exploring*
+cause it enables to improve estimate of the non-greedy action.
+Exploitation maximize the expected reward one step
+and exploration may produce greater total reward.
+It is impossible to explore and exploit with any single action selection
+so this is referred as *conflict* between exploration and exploitation.
+The need to balance exploration and exploitation is big challenge in
+reinforcement learning.
 
 ### A \\(k\\)-armed Bandit Problem
 
@@ -508,20 +552,6 @@ the \\(k\\)-armed bandit problem.
 But their are not certainly known although there might be estimates.
 The estimated value of action \\(a\\) at time step \\(t\\) is \\(Q\_t(a)\\)
 and it should be as close as possible to \\(q\_\*(a)\\).
-
-### Exploration and Exploitation
-
-Actions whose estimated value is greatest are called *greedy* actions.
-Selecting one of these actions is *exploiting* current knowledge of the
-values of the actions.
-If a non-greedy action is selected than an agent is *exploring*
-cause it enables to improve estimate of the non-greedy action.
-Exploitation maximize the expected reward one step
-and exploration may produce greater total reward.
-It is impossible to explore and exploit with any single action selection
-so this is referred as *conflict* between exploration and exploitation.
-The need to balance exploration and exploitation is big challenge in
-reinforcement learning.
 
 ### Action-value Methods
 
