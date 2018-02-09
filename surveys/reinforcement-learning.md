@@ -304,7 +304,7 @@ def policy_improvement(env, V, gamma=1.0):
 
 ### Policy Iteration
 
-Previous sections show how to improve a policy a how to compute it value
+Previous sections show how to improve a policy a how to compute its value
 function.
 This process can be repeated. Each policy is guaranteed to be strict
 improvement unless it is already optimal.
@@ -371,23 +371,25 @@ Thus there is no need for full knowledge of an environment as in dynamic
 programming.
 Monte Carlo methods are based on sampling episodes and at the end of each
 episode they make update to value function according to estimate from
-that estimate.
+that episode.
 In this is one drawback of these methods that they are high variance
 due to lot of randomness within an episode but they are not biased.
 
 There are Monte Carlo algorithms for policy evaluation and control.
 But I would not go into details of that still the code is available in
-the [gym-rl] repository and let's move on to temporal-difference learning
-from which there is only small step towards more complicated methods.
+the [gym-rl] repository
+Let's move on to temporal-difference learning
+from which there is only small step towards more complicated methods for large
+problems.
 
 ## Temporal-Difference Learning
 
 Temporal-difference learning is combination of Monte Carlo methods and dynamic
 programming.
-It is *model-free* and *bootstrap* which means that it estimate value function
-based on other estimates.
-This allows it to be online and fully incremental because it samples and can
-perform update every time step.
+It is *model-free* and it *bootstraps* which means that it estimates value
+function based on other estimates.
+This allows it to be online and fully incremental because it samples and
+performs update on every time step.
 
 Temporal-difference prediction is base on equation:
 
@@ -398,16 +400,16 @@ TD-error.
 
 ### Sarsa
 
-Sarsa is *on-policy* temporal-difference control.
-It learn action-value function \\(q\_\pi(s, a)\\) for current behavior policy
+Sarsa is *on-policy* temporal-difference control method.
+It learns action-value function \\(q\_\pi(s, a)\\) for current behavior policy
 \\(\pi\\).
-Therefore is rather uses this equation:
+Therefore it rather uses this action-value equation:
 
 \\[Q(S\_t, A\_t) \gets Q(S\_t, A\_t) + \alpha (R\_{t + 1} + \gamma
 Q(S\_{t + 1}, A\_{t + 1}) - Q(S\_t, A\_t)).\\]
 
 This update is done after every transition and it uses tuple
-\\(S\_t, A\_t, R\_{t + 1}, S\_{t + 1}, A\_{t + 1}\\) which gives it its name
+\\(S\_t, A\_t, R\_{t + 1}, S\_{t + 1}, A\_{t + 1}\\) which gives it the name
 Sarsa:
 
 ```python
@@ -442,7 +444,7 @@ def sarsa(env, n_episodes, gamma=1.0, alpha=0.5, epsilon=0.1):
 ```
 
 where `epsilon_greedy_policy` is function which with probability `epsilon`
-select random action else select greedy action.
+selects a random action else selects a greedy action.
 This is needed to assure exploration of whole state space.
 
 ### Q-learning
@@ -456,7 +458,9 @@ Q(S\_{t + 1}, a) - Q(S\_t, A\_t)).\\]
 Therefore the learned action-value function \\(Q\\) directly approximates
 \\(q\_\*\\) independent of policy that is followed.
 The policy that is followed only has to explore the whole space.
-This has been proved to converge by Watkins in 1989.
+This has been proved to converge by [Watkins] in 1989.
+
+[watkins]: http://www.cs.rhul.ac.uk/%7Echrisw/thesis.html
 
 Q-learning algorithm is very similar to Sarsa:
 
@@ -514,22 +518,25 @@ Material to get into these areas are in the references.
 
 ## Exploration and Exploitation
 
-Actions whose estimated value is greatest are called *greedy* actions.
-Selecting one of these actions is *exploiting* current knowledge of the
-values of the actions.
-If a non-greedy action is selected than an agent is *exploring*
-cause it enables to improve estimate of the non-greedy action.
-Exploitation maximize the expected reward one step
-and exploration may produce greater total reward.
-It is impossible to explore and exploit with any single action selection
-so this is referred as *conflict* between exploration and exploitation.
+This section is going to introduce one central problem of reinforcement
+learning.
 The need to balance exploration and exploitation is big challenge in
 reinforcement learning.
+Actions whose estimated value is greatest are called *greedy* actions.
+Selecting one of these actions is *exploiting* current knowledge of the values
+of the actions.
+If a non-greedy action is selected than an agent is *exploring* cause it enables
+to improve estimate of the non-greedy action.
+Exploitation maximize the expected reward one step and exploration may produce
+greater total reward.
+It is impossible to explore and exploit with any single action selection
+so this is referred as *conflict* between exploration and exploitation.
 
 ### A \\(k\\)-armed Bandit Problem
 
 The \\(k\\)-armed bandit problem is named by analogy to
-[slot machine][slot-machine].
+[slot machine][slot-machine] and it is well suited to demonstrate the
+exploitation and exploration problem.
 An agent is repeatedly faced with a choice among \\(k\\) different actions
 in *non-associative*, *stationary* setting (action taken only in one situation).
 After each choice it receive a numerical reward from a stationary probability
@@ -538,17 +545,17 @@ The objective is to maximize the expected total reward over some *time steps*.
 
 [slot-machine]: https://en.wikipedia.org/wiki/Slot_machine (Slot Machine)
 
-In the \\(k\\)-armed bandit problem each of the \\(k\\) actions has an expected reward
-given that the action is selected (action's value).
-The action selected at time step \\(t\\) is denoted as \\(A\_t\\)
-and its reward as \\(R\_t\\).
-The value of an arbitrary action \\(a\\) is the expected reward
-given that \\(a\\) is selected:
+In the \\(k\\)-armed bandit problem each of the \\(k\\) actions has an expected
+reward given that the action is selected (action's value).
+The action selected at time step \\(t\\) is denoted as \\(A\_t\\) and its reward
+as \\(R\_t\\).
+The value of an arbitrary action \\(a\\) is the expected reward given that
+\\(a\\) is selected:
 
 \\[q\_\*(a) \equiv \mathbb{E}(R\_t | A\_t = a).\\]
 
-If the value of each function was known it would be trivial to solve
-the \\(k\\)-armed bandit problem.
+If the value of each function was known it would be trivial to solve the
+\\(k\\)-armed bandit problem.
 But their are not certainly known although there might be estimates.
 The estimated value of action \\(a\\) at time step \\(t\\) is \\(Q\_t(a)\\)
 and it should be as close as possible to \\(q\_\*(a)\\).
