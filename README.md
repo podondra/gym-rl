@@ -12,7 +12,7 @@ It also uses OpenAI [gym-gridworlds] environments that I implemented myself.
 
 The blog post will be available on [podondra site][site].
 
-[site]: https://podondra.cz
+[site]: https://podondra.cz/introduction-to-reinforcement-learning.html
 
 ## Setup
 
