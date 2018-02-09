@@ -1,0 +1,3 @@
+[submodule "examples/gym-gridworlds"]
+	path = examples/gym-gridworlds
+	url = https://github.com/podondra/gym-gridworlds.git
