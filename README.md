@@ -1,8 +1,14 @@
 # Reinforcement Learning in OpenAI gym
 
 This work aims to use reinforcement learning to solve some [gym] environments.
+In [examples] there are some basic algorithms.
+Then there are [atari] directory with algorithms for solving
+[Atari 2600 games][atari-2600] and [classic] directory with algorithms for
+classic control problem from OpenAI gym.
 
 [gym]: https://github.com/openai/gym (gym GitHub repository)
+[atari]: examples/
+[classic]: classic/
 
 It also uses OpenAI [gym-gridworlds] environments that I implemented myself.
 
@@ -27,10 +33,10 @@ The blog post will be available on [podondra site][site].
 ## Algorithms for OpenAI gym
 
 This [survey] list algorithms which can be applied to OpenAI gym environment
-such as [Atari 2600][atari] games, HumanoidFlagrun or Kick and Defend.
+such as [Atari 2600][atari-2600] games, HumanoidFlagrun or Kick and Defend.
 
 [survey]: surveys/gym-algorithms-survey.md
-[atari]: https://en.wikipedia.org/wiki/Atari_2600
+[atari-2600]: https://en.wikipedia.org/wiki/Atari_2600
 
 ## References
 
