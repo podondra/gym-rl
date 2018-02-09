@@ -26,3 +26,4 @@ for i_episode in range(20):
         if done:
             print('episode finished after {:>2} time steps'.format(t))
             break
+env.close()
