@@ -382,11 +382,68 @@ from which there is only small step towards more complicated methods.
 
 ## Temporal-Difference Learning
 
-TODO temporal-difference learning.
+Temporal-difference learning is combination of Monte Carlo methods and dynamic
+programming.
+It is *model-free* and *bootstrap* which means that it estimate value function
+based on other estimates.
+This allows it to be online and fully incremental because it samples and can
+perform update every time step.
+
+Temporal-difference prediction is base on equation:
+
+\\[V(S\_t) \gets V(S\_t) + \alpha (R\_{t + 1} + V(S\_{t + 1}) - V(S\_t)),\\]
+
+where the term \\(\delta\_t = R\_{t + 1} + V(S\_{t + 1}) - V(S\_t)\\) is called
+TD-error.
 
 ### Sarsa
 
-TODO Sarsa.
+Sarsa is *on-policy* temporal-difference control.
+It learn action-value function \\(q\_\pi(s, a)\\) for current behavior policy
+\\(\pi\\).
+Therefore i rather uses this equation:
+
+\\[Q(S\_t, A\_t) \gets Q(S\_t, A\_t) + \alpha (R\_{t + 1} + Q(S\_{t + 1},
+A\_{t + 1}) - Q(S\_t), A\_t).\\]
+
+This update is done after every transition and it uses tuple
+\\(S\_t, A\_t, R\_{t + 1}, S\_{t + 1}, A\_{t + 1}\\) which gives it its name
+Sarsa:
+
+```python
+def sarsa(env, n_episodes, gamma=1.0, alpha=0.5, epsilon=0.1):
+    """Sarsa algorithm.
+
+    Return action-value function for optimal epsilon-greedy policy for an
+    environment.
+
+    env is an OpenAI gym environment.
+    n_episodes is number of episodes to run.
+    gamma is an discount factor.
+    alpha is an learning rate.
+    epsilon is probability of selecting random action.
+    """
+    # rather than store Q as table use dictionary (default value is 0)
+    Q = defaultdict(float)
+    for _ in range(n_episodes):
+        # reset environment
+        S = env.reset()
+        # choose epsilon-greedy action with respect to Q
+        A = epsilon_greedy_policy(env, S, Q, epsilon)
+        while True:
+            S_prime, R, done, _ = env.step(A)
+            A_prime = epsilon_greedy_policy(env, S_prime, Q, epsilon)
+            # temporal-difference update
+            Q[S, A] += alpha * (R + gamma * Q[S_prime, A_prime] - Q[S, A])
+            S, A = S_prime, A_prime
+            if done:
+                break
+    return Q
+```
+
+where `epsilon_greedy_policy` is function which with probability `epsilon`
+select random action else select greedy action.
+This is needed to assure exploration of whole state space.
 
 ### Q-learning
 

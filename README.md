@@ -1,4 +1,4 @@
-# Reinforcement Learning in gym
+# Reinforcement Learning in OpenAI gym
 
 This work aims to use reinforcement learning to solve some [gym] environments.
 
@@ -18,7 +18,7 @@ The blog post will be available on [podondra site][site].
 
 	$ git clone https://github.com/podondra/gym-rl	# clone this repository
 	$ git submodule init
-	$ git submodule update	# download also gym-gridworld for browsing
+	$ git submodule update	# clone also gym-gridworlds for browsing
 	$ python3.6 -m venv venv	# create virtual environment
 	$ source venv/bin/activate	# active virtual environment
 	$ pip install -U pip setuptools wheel	# update some packages
@@ -27,9 +27,10 @@ The blog post will be available on [podondra site][site].
 ## Algorithms for OpenAI gym
 
 This [survey] list algorithms which can be applied to OpenAI gym environment
-such as Atari 2600 game, HumanoidFlagrun or Kick and Defend.
+such as [Atari 2600][atari] games, HumanoidFlagrun or Kick and Defend.
 
 [survey]: surveys/gym-algorithms-survey.md
+[atari]: https://en.wikipedia.org/wiki/Atari_2600
 
 ## References
 
